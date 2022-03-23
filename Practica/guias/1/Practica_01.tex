@@ -40,13 +40,16 @@ Información:
 
 \subsubsection*{a}
 Falsa, pues la cantidad de elementos por fila de $A$ no es igual a la cantidad de elementos por fila de $z$.
+
+\begin{multicols}{3}
 \subsubsection*{b}
 Verdadera.
 \subsubsection*{c}
 Verdadera.
 \subsubsection*{d}
 $d^{-1}$???
-\subsection*{Ejercicio 2}
+\end{multicols}
+    \subsection*{Ejercicio 2}
 
 Información:
 
@@ -297,6 +300,9 @@ $C_{22} = A_{21}B_{12} + A_{22}B_{22} =
 
 \subsection*{Ejercicio 3}
 
+
+\textcolor{red}{falta pensar}
+
 \subsubsection*{a}
 
 
@@ -313,7 +319,15 @@ A = \begin{bmatrix}
 B = \begin{bmatrix}
     0 & 1 \\
     1 & 0
-\end{bmatrix}$
+\end{bmatrix}$ pues 
+$AB = \begin{bmatrix}
+    1 & 1 \\
+    1 & 0
+\end{bmatrix}$ y 
+$BA = \begin{bmatrix}
+    0 & 1 \\
+    1 & 1
+\end{bmatrix}$, donde $tr(AB) = 1$ y $tr(A)tr(B) = 0$
 
 
 \subsection*{Ejercicio 5}
@@ -374,33 +388,140 @@ No es L.I., $1\cdot(3,3,3) + 2\cdot(2,1,0) = (7,5,3)$.
 
 \subsubsection*{a}
 
+Dado que los vectores no son L.I. (pues $-4\cdot(1,2,0)+ 5\cdot(1,3,6) = (1,7,30)$), 
+tomo las siguientes dos bases y las extiendo con el vector canonico correspondiente.
+\begin{itemize}
+    \item $\langle (1,2,0), (1,3,6), (0,1,0) \rangle$
+    \item $\langle (1,2,0), (1,7,30), (1,0,0) \rangle$
+\end{itemize}
+
 \subsubsection*{b}
+
+Dado que los vectores no son L.I. (pues $4\cdot(1,2) = (4,8)$), 
+tomo las siguientes dos bases y las extiendo con el vector canonico correspondiente.
+\begin{itemize}
+    \item $\langle (1,2), (0,1) \rangle$
+    \item $\langle (1,2), (1,0) \rangle$
+\end{itemize}
 
 \subsection*{Ejercicio 11}
 
 \subsubsection*{a}
 
+Sea $\lambda \in \mathbb{R},~ \lambda \neq 0$. Quiero probar que:
+
+\begin{center}
+    $\{v_1,\ldots,v_i,\ldots,v_m\} \subseteq \mathbb{R}^{n}$ con $m \leq n$ es L.I. 
+    $\iff$ 
+    $\{v_1,\ldots,\lambda v_i,\ldots,v_m\}$ es L.I.
+\end{center}
+
+\begin{itemize}
+    \item[] $(\implies)$ Tengo que $\{v_1,\ldots,v_i,\ldots,v_m\}$ es L.I., lo cual significa que para una combinación 
+    lineal \\ $w = \sum_{i=1}^{m} \alpha_{i}v_{i}, \text{si} ~w = 0 \implies \alpha_i = 0 ~ \forall i = 1,\ldots,m$. \\ En
+    particular, esto aplica para cualquier producto por escalar $v_j = \lambda v_i$ (con $\lambda \in \mathbb{R}, ~ \lambda \neq 0$ y $1 \leq j \leq m$),
+    pues al tratarse de vectores linealmente independientes se tiene que \\
+    $0 = \alpha_1v_1+\cdots+\alpha_{i}v_{i}+\cdots+\alpha_{m}v_{m} = 
+    \alpha_1v_1+\cdots+\alpha_{i}v_{j}+\cdots+\alpha_{m}v_{m} = 
+    \alpha_1v_1+\cdots+\alpha_{i}\lambda v_{i}+\cdots+\alpha_{m}v_{m} = 0$, \\
+    con lo que $\{v_1,\ldots,\lambda v_i,\ldots,v_m\}$ es L.I.
+    \item[] $(\impliedby)$ Tengo que $\{v_1,\ldots,\lambda v_i,\ldots,v_m\}$ es L.I., lo cual significa que para una combinación 
+    lineal \\ $w = \sum_{j=1 / j \neq i}^{m} \alpha_{j}v_{j} + \alpha_i\lambda v_i, \text{si} ~w = 0 \implies \alpha_j = 0 ~ \forall i = 1,\ldots,m$. \\
+    En particular, esto aplica para cualquier producto por escalar $v_j = \frac{1}{\lambda}v_i$ (con $\lambda \in \mathbb{R}, ~\lambda \neq 0$ y $1 \leq j \leq m$),
+    pues al tratarse de vectores linealmente independientes se tiene que \\
+    $0 = \alpha_1v_1+\cdots+\alpha_{i}\lambda v_{i}+\cdots+\alpha_{m}v_{m} = 
+    \alpha_1v_1+\cdots+\alpha_{i}v_{j}+\cdots+\alpha_{m}v_{m} = 
+    \alpha_1v_1+\cdots+\alpha_{i}v_{i}+\cdots+\alpha_{m}v_{m} = 0$, \\
+    con lo que $\{v_1,\ldots,v_i,\ldots,v_m\}$ es L.I.
+\end{itemize}
+
+\noindent Con esto se prueba lo pedido.
+
 \subsubsection*{b}
+
+Sea $\lambda \in \mathbb{R}$. Quiero probar que:
+
+\begin{center}
+    $\{v_1,\ldots,v_i,\ldots,v_j,\ldots,v_m\} \subseteq \mathbb{R}^{n}$ con $m \leq n$ es L.I. 
+    $\iff$ 
+    $\{v_1,\ldots,v_i + \lambda v_j,\ldots,v_j,\ldots,v_m\}$ es L.I.
+\end{center}
+
+\begin{itemize}
+    \item[] $(\implies)$ \textcolor{red}{usar el punto a)} 
+    \item[] $(\impliedby)$ 
+\end{itemize}
 
 \subsection*{Ejercicio 12}
 
+\
+
 \subsection*{Ejercicio 13}
+
+\
 
 \subsection*{Ejercicio 14}
 
+\
+
 \subsection*{Ejercicio 15}
+
+\[f(x_1,x_2,x_3) = (x_1 + 2x_2 + 3x_3, 7x_1 + 4x_2 + 3x_3)\]
 
 \subsection*{Ejercicio 16}
 
+\[A = \begin{bmatrix}
+    1 & 2 & 3 \\
+    2 & 0 & 3 \\
+    0 & 3 & 2
+\end{bmatrix}\]
+
 \subsection*{Ejercicio 17}
 
+Para \[A = \begin{pmatrix}
+    1 & 2 & 3 \\
+    2 & 1 & 2 \\
+    1 & 3 & 4 \\
+    0 & 0 & 1
+\end{pmatrix}\]
+
+\noindent se tiene 
+
+\begin{itemize}
+    \item $Nu(A) = $ 
+    \item $Im(A) = $ 
+    \item $rg(A) = 3$
+    \item $e = dim(Nu(A)) + dim(Im(A)) = $  
+\end{itemize}
+
+\
+
+\noindent Para \[A = \begin{pmatrix}
+    1 & 1 & 1 \\
+    2 & 3 & 7 \\
+    1 & 6 & 30
+\end{pmatrix}\]
+
+\noindent se tiene 
+
+\begin{itemize}
+    \item $Nu(A) = $ 
+    \item $Im(A) = $ 
+    \item $rg(A) = 2$
+    \item $e = dim(Nu(A)) + dim(Im(A)) = $  
+\end{itemize}
+
 \subsection*{Ejercicio 18}
+
+\
 
 \subsubsection*{a}
 
 \subsubsection*{b}
 
 \subsection*{Ejercicio 19}
+
+\
 
 \subsubsection*{a}
 
@@ -410,6 +531,8 @@ No es L.I., $1\cdot(3,3,3) + 2\cdot(2,1,0) = (7,5,3)$.
 
 \subsection*{Ejercicio 20}
 
+\
+
 \subsubsection*{a}
 
 \subsubsection*{b}
@@ -417,6 +540,8 @@ No es L.I., $1\cdot(3,3,3) + 2\cdot(2,1,0) = (7,5,3)$.
 \subsubsection*{c}
 
 \subsection*{Ejercicio 21}
+
+\
 
 \subsubsection*{a}
 
@@ -428,6 +553,8 @@ No es L.I., $1\cdot(3,3,3) + 2\cdot(2,1,0) = (7,5,3)$.
 
 \subsection*{Ejercicio 22}
 
+\
+
 \subsubsection*{a}
 
 \subsubsection*{b}
@@ -438,6 +565,8 @@ No es L.I., $1\cdot(3,3,3) + 2\cdot(2,1,0) = (7,5,3)$.
 
 \subsection*{Ejercicio 23}
 
+\
+
 \subsubsection*{a}
 
 \subsubsection*{b}
@@ -446,11 +575,15 @@ No es L.I., $1\cdot(3,3,3) + 2\cdot(2,1,0) = (7,5,3)$.
 
 \subsection*{Ejercicio 24}
 
+\
+
 \subsubsection*{a}
 
 \subsubsection*{b}
 
 \subsection*{Ejercicio 25}
+
+\
 
 \subsubsection*{a}
 
@@ -458,7 +591,11 @@ No es L.I., $1\cdot(3,3,3) + 2\cdot(2,1,0) = (7,5,3)$.
 
 \subsection*{Ejercicio 26}
 
+\
+
 \subsection*{Ejercicio 27}
+
+\
 
 \subsubsection*{a}
 
@@ -468,19 +605,29 @@ No es L.I., $1\cdot(3,3,3) + 2\cdot(2,1,0) = (7,5,3)$.
 
 \subsection*{Ejercicio 28}
 
+\
+
 \subsubsection*{a}
 
 \subsubsection*{b}
 
 \subsection*{Ejercicio 29}
 
+\
+
 \subsection*{Ejercicio 30}
+
+\
 
 \section*{Resolver en computadora}
 
 \subsection*{Ejercicio I}
 
+\
+
 \subsection*{Ejercicio II}
+
+\
 
 \subsubsection*{a}
 
@@ -490,10 +637,14 @@ No es L.I., $1\cdot(3,3,3) + 2\cdot(2,1,0) = (7,5,3)$.
 
 \subsection*{Ejercicio III}
 
+\
+
 \subsubsection*{a}
 
 \subsubsection*{b}
 
 \section*{Referencias}
+
+\
 
 \end{document}
