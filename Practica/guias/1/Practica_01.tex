@@ -701,17 +701,157 @@ Con ello se concluye:
 \noindent Para \[A = \begin{pmatrix}
     1 & 1 & 1 \\
     2 & 3 & 7 \\
-    1 & 6 & 30
+    0 & 6 & 30
 \end{pmatrix}\]
 
-\noindent se tiene 
+\noindent Procedo a triangular $A$:
+
+
+\
+
+\[
+\begin{bmatrix}
+    1 & 1 & 1 \\
+    2 & 3 & 7 \\
+    0 & 6 & 30
+\end{bmatrix}
+\underset{F_2 - 2F_1}{\rightarrow}
+\begin{bmatrix}
+    1 & 1 & 1 \\
+    0 & 1 & 5 \\
+    0 & 6 & 30
+\end{bmatrix}
+\underset{F_3 - 6F_2}{\rightarrow}
+\begin{bmatrix}
+    1 & 1 & 1 \\
+    0 & 1 & 5 \\
+    0 & 0 & 0
+\end{bmatrix}
+\]
+
+\
+
+\noindent Luego tomo las 2 primeras filas ya que son L.I. y formulo una combinación lineal con parametros 
+de los 2 vectores que generan el subespacio:
+
+\
+
+\[v =  
+\alpha\begin{bmatrix}
+    1 \\
+    1 \\
+    1
+\end{bmatrix}
++
+\beta\begin{bmatrix}
+    0 \\ 
+    1 \\
+    5
+\end{bmatrix}
+\]
+
+\
+
+\noindent Con esto puedo calcular la imagen multiplicando cada uno por la matriz original para encontrar una base de la imagen.
+
+\
+
+\[Av = 
+\alpha\begin{bmatrix}
+    1 & 1 & 1 \\
+    2 & 3 & 7 \\
+    0 & 6 & 30
+\end{bmatrix}\cdot
+\begin{bmatrix}
+    1 \\
+    1 \\
+    1
+\end{bmatrix}
++
+\beta\begin{bmatrix}
+    1 & 1 & 1 \\
+    2 & 3 & 7 \\
+    0 & 6 & 30
+\end{bmatrix}\cdot
+\begin{bmatrix}
+    0 \\
+    1 \\
+    5
+\end{bmatrix}
+=
+\alpha\begin{bmatrix}
+    3 \\
+    12 \\
+    36
+\end{bmatrix}
++
+\beta\begin{bmatrix}
+    6 \\
+    38 \\
+    156
+\end{bmatrix}
+\]
+
+\
+
+\noindent Y entonces obtengo $Im(A) = \langle (3,12,36), (6, 38, 156) \rangle$
+
+\
+
+\noindent Para el nucleo de $A$ tengo que triangular su matriz extendida con el vector nulo:
+
+\
+
+\[
+\begin{bmatrix}
+    1 & 1 & 1 & | & 0 \\
+    2 & 3 & 7 & | & 0 \\
+    0 & 6 & 30 & | & 0 
+\end{bmatrix}
+\sim
+\begin{bmatrix}
+    1 & 1 & 1 & | & 0 \\
+    0 & 1 & 5 & | & 0 \\
+    0 & 0 & 0 & | & 0
+\end{bmatrix}
+\]
+
+\
+
+\noindent Dado que no todo se iguala a cero, me encuentro con el siguiente sistema de ecuiaciones:
+
+\
+
+\begin{align*}
+    x_1 + x_2 + x_3 &= 0 \\
+    x_2 + 5x_3 &= 0
+\end{align*}
+
+\
+
+del cual se puede concluir que requiero por la segunda ecuación $x_2 = -5x_3$ y $x_1 = 4x_3$ por la primera.
+
+\
+
+\noindent De este modo, el nuvleo resultante es $Nu(A) = \langle (4,-5,1) \rangle$
+
+\
+
+\noindent Por otro lado, como luego de triangular $A$, solo 2 columnas y filas resultaron ser L.I.,
+su rango fila y su rango columna es 2.
+
+\
+
+Con ello se concluye:
 
 \begin{itemize}
-    \item $Nu(A) = $ 
-    \item $Im(A) = $ 
-    \item $rg(A) = $
-    \item $e = \dim(Nu(A)) + \dim(Im(A)) = $  
+    \item $Nu(A) = \langle (4,-5,1) \rangle$ 
+    \item $Im(A) = \langle (3,12,36), (6, 38, 156) \rangle$
+    \item $rg(A) = 2$
+    \item $n = \dim(Nu(A)) + \dim(Im(A)) = 3$  
 \end{itemize}
+
+\newpage
 
 \subsection*{Ejercicio 18}
 
