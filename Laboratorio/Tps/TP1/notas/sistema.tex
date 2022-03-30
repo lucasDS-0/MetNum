@@ -190,14 +190,14 @@ Para resolver el problema planteo la ecuación de calor para cada punto interno:
 \begin{align*}
     \frac{-[{(\Delta r)}^{-2} - {(r_1\Delta r)}^{-1}]t_{01} - [{(r_{1}\Delta \theta)}^{-2}]t_{10} 
     - [{(r_{1}\Delta \theta)}^{-2}]t_{12} - [{(\Delta r)}^{-2}]t_{21}}
-    {[{(r_1\Delta r)}^{-1} - 2{(\Delta r)}^{-2} - 2{(r_{1}\Delta \theta)}^{-2}]} &= t_{11} \\
+    {[{(r_1\Delta r)}^{-1} - 2{(\Delta r)}^{-2} - 2{(r_{1}\Delta \theta)}^{-2}]} - t_{11} &= 0 \\
     %
     \textcolor{magenta}{
     -\frac{[{(\Delta r)}^{-2} - {(r_1\Delta r)}^{-1}]}{[{(r_1\Delta r)}^{-1} - 2{(\Delta r)}^{-2} - 2{(r_{1}\Delta \theta)}^{-2}]}t_{01}}
     & \\
     \textcolor{magenta}{
     -\frac{[{(r_{1}\Delta \theta)}^{-2}]}{[{(r_1\Delta r)}^{-1} - 2{(\Delta r)}^{-2} - 2{(r_{1}\Delta \theta)}^{-2}]}(t_{10} + t_{12})
-    -\frac{[{(\Delta r)}^{-2}]}{[{(r_1\Delta r)}^{-1} - 2{(\Delta r)}^{-2} - 2{(r_{1}\Delta \theta)}^{-2}]}t_{21}} &~\textcolor{magenta}{= t_{11}}
+    -\frac{[{(\Delta r)}^{-2}]}{[{(r_1\Delta r)}^{-1} - 2{(\Delta r)}^{-2} - 2{(r_{1}\Delta \theta)}^{-2}]}t_{21} - t_{11}} &~\textcolor{magenta}{= 0}
 \end{align*}
 
 \newpage
@@ -216,42 +216,112 @@ procedo a calcular los coeficientes de las incognitas:
     -\frac{[{(\Delta r)}^{-2} - {(r_1\Delta r)}^{-1}]}{[{(r_1\Delta r)}^{-1} - 2{(\Delta r)}^{-2} - 2{(r_{1}\Delta \theta)}^{-2}]}t_{01}
     & \\
     -\frac{[{(r_{1}\Delta \theta)}^{-2}]}{[{(r_1\Delta r)}^{-1} - 2{(\Delta r)}^{-2} - 2{(r_{1}\Delta \theta)}^{-2}]}(t_{10} + t_{12})
-    -\frac{[{(\Delta r)}^{-2}]}{[{(r_1\Delta r)}^{-1} - 2{(\Delta r)}^{-2} - 2{(r_{1}\Delta \theta)}^{-2}]}t_{21} &= t_{11} \\
+    -\frac{[{(\Delta r)}^{-2}]}{[{(r_1\Delta r)}^{-1} - 2{(\Delta r)}^{-2} - 2{(r_{1}\Delta \theta)}^{-2}]}t_{21} - t_{11} &= 0 \\
     %
     -\frac{2^{-2} - 16^{-1}}{[16^{-1} - 2^{-1} - 2{(8\pi)}^{-2}]}t_{01}
     -\frac{{(8\pi)}^{-2}}{[16^{-1} - 2^{-1} - 2{(8\pi)}^{-2}]}(t_{10} + t_{12})
-    -\frac{2^{-2}}{[16^{-1} - 2^{-1} - 2{(8\pi)}^{-2}]}t_{21} &= t_{11} \\
+    -\frac{2^{-2}}{[16^{-1} - 2^{-1} - 2{(8\pi)}^{-2}]}t_{21} - t_{11} &= 0 \\
     %
     \frac{6\pi^2}{14\pi^2 + 1}t_{01}
     +\frac{1}{28\pi^2 + 2}(t_{10} + t_{12})
-    +\frac{8\pi^2}{14\pi^2 + 1}t_{21} &= t_{11} \\
+    +\frac{8\pi^2}{14\pi^2 + 1}t_{21} - t_{11} &= 0 \\
     %
     \frac{6\pi^2}{14\pi^2 + 1}t_{01}
     +\frac{1}{28\pi^2 + 2}(t_{10} + t_{12})
-    +\frac{8\pi^2}{14\pi^2 + 1}t_{21} &= t_{11} \\
+    +\frac{8\pi^2}{14\pi^2 + 1}t_{21} - t_{11} &= 0 \\
 \end{align*}
 
 \noindent No quedando nada por simplificar, estas son las incógnitas que han de ser resueltas utilizando un sistema de ecuaciones.
 
 \
 
-En este caso particular, se puede simplificar un poco más ya que $t_{10} = t_{12}$, con ello:
+En ESTE caso particular, se puede simplificar un poco más ya que $t_{10} = t_{12}$, con ello:
 
 
 \begin{align*}
     \frac{6\pi^2}{14\pi^2 + 1}t_{01}
     +\frac{1}{28\pi^2 + 2}(t_{10} + t_{12})
-    +\frac{8\pi^2}{14\pi^2 + 1}t_{21} &= t_{11} \\
+    +\frac{8\pi^2}{14\pi^2 + 1}t_{21} - t_{11} &= 0 \\
     %
     \frac{6\pi^2}{14\pi^2 + 1}t_{01}
     +\frac{1}{28\pi^2 + 2}(2t_{10})
-    +\frac{8\pi^2}{14\pi^2 + 1}t_{21} &= t_{11} \\
+    +\frac{8\pi^2}{14\pi^2 + 1}t_{21} - t_{11} &= 0 \\
     %
     \frac{6\pi^2}{14\pi^2 + 1}t_{01}
     +\frac{1}{14\pi^2 + 1}t_{10}
-    +\frac{8\pi^2}{14\pi^2 + 1}t_{21} &= t_{11} \\
+    +\frac{8\pi^2}{14\pi^2 + 1}t_{21} - t_{11} &= 0 \\
 \end{align*}
 
-\noindent sigo sin entender del todo la matriz de coeficientes :c
+\noindent ponele que ahora entiendo la matriz de coeficientes ¿:c?
+
+\
+
+Notar que todas las ecuaciones del sistema comparten la forma...?:
+\textcolor{red}{
+\begin{align*}
+    T(r_j,\theta_k) =-\frac{[{(\Delta r)}^{-2} - {(r_j\Delta r)}^{-1}]}{[{(r_1\Delta r)}^{-1} - 2{(\Delta r)}^{-2} - 2{(r_{j}\Delta \theta)}^{-2}]}t_{j-1,k}
+    & \\
+    -\frac{[{(r_{j}\Delta \theta)}^{-2}]}{[{(r_j\Delta r)}^{-1} - 2{(\Delta r)}^{-2} - 2{(r_{j}\Delta \theta)}^{-2}]}(t_{j,k-1} + t_{j,k+1})
+    -\frac{[{(\Delta r)}^{-2}]}{[{(r_j\Delta r)}^{-1} - 2{(\Delta r)}^{-2} - 2{(r_{j}\Delta \theta)}^{-2}]}t_{j+1,k}  - t_{jk} &= 0
+\end{align*}
+}
+\
+
+\noindent Luego planteo las otras ecuaciones del sistema 
+(las cuales resultan ser la misma entre sí porque $\theta_0 = \theta_n$ y 
+dado que están en el mismo radio las tres, utilizan el mismo $r_j$)
+
+\begin{align*}
+    T(r_1,\theta_2) = -\frac{[{(\Delta r)}^{-2} - {(r_1\Delta r)}^{-1}]}{[{(r_1\Delta r)}^{-1} - 2{(\Delta r)}^{-2} - 2{(r_{1}\Delta \theta)}^{-2}]}t_{02}
+    & \\
+    -\frac{[{(r_{1}\Delta \theta)}^{-2}]}{[{(r_1\Delta r)}^{-1} - 2{(\Delta r)}^{-2} - 2{(r_{1}\Delta \theta)}^{-2}]}(2t_{11})
+    -\frac{[{(\Delta r)}^{-2}]}{[{(r_1\Delta r)}^{-1} - 2{(\Delta r)}^{-2} - 2{(r_{1}\Delta \theta)}^{-2}]}t_{22}  - t_{12} &= 0\\
+    %
+    \frac{6\pi^2}{14\pi^2 + 1}t_{02}
+    +\frac{1}{14\pi^2 + 1}t_{11}
+    +\frac{8\pi^2}{14\pi^2 + 1}t_{22} - t_{12} &= 0 \\
+\end{align*}
+
+y por otro lado de forma similar:
+
+\begin{align*}
+    T(r_1,\theta_0) = -\frac{[{(\Delta r)}^{-2} - {(r_1\Delta r)}^{-1}]}{[{(r_1\Delta r)}^{-1} - 2{(\Delta r)}^{-2} - 2{(r_{1}\Delta \theta)}^{-2}]}t_{00}
+    & \\
+    -\frac{[{(r_{1}\Delta \theta)}^{-2}]}{[{(r_1\Delta r)}^{-1} - 2{(\Delta r)}^{-2} - 2{(r_{1}\Delta \theta)}^{-2}]}(2t_{11})
+    -\frac{[{(\Delta r)}^{-2}]}{[{(r_1\Delta r)}^{-1} - 2{(\Delta r)}^{-2} - 2{(r_{1}\Delta \theta)}^{-2}]}t_{20} - t_{10} &= 0 \\
+    %
+    \frac{6\pi^2}{14\pi^2 + 1}t_{00}
+    +\frac{1}{14\pi^2 + 1}t_{11}
+    +\frac{8\pi^2}{14\pi^2 + 1}t_{20} - t_{10} &= 0 \\
+\end{align*}
+
+\newpage
+
+Con esta información el sistema de ecuaciones resultante es el siguiente (intento ordenarlo de forma creciente entre los indices):
+
+\
+
+{\tiny
+\begin{align*}
+    \frac{6\pi^2}{14\pi^2 + 1}t_{00}&&&-t_{10}&+\frac{1}{14\pi^2 + 1}t_{11}&&+\frac{8\pi^2}{14\pi^2 + 1}t_{20}&&&=0 \\
+    &\frac{6\pi^2}{14\pi^2 + 1}t_{01}&&+\frac{1}{14\pi^2 + 1}t_{10}&-t_{11}&&&+\frac{8\pi^2}{14\pi^2 + 1}t_{21}&&=0 \\
+    &&\frac{6\pi^2}{14\pi^2 + 1}t_{02}&&+\frac{1}{14\pi^2 + 1}t_{11}&-t_{12}&&&+\frac{8\pi^2}{14\pi^2 + 1}t_{22}&=0 \\
+    ~t_{00}&&&&&&&&&=1500 \\
+    &~t_{01}&&&&&&&&=1500 \\
+    &&~t_{02}&&&&&&&=1500 \\
+    &&&&&&~t_{20}&&&=200 \\
+    &&&&&&&~t_{21}&&=200 \\
+    &&&&&&&&~t_{22}&=200
+\end{align*}
+}
+
+dudas e ideas:
+
+\begin{itemize}
+    \item ver que pasa al diagonalizar
+    \item ver que pasa (sin diagonalizar) si reemplazan las variables de las que ya se sabe su valor
+    \item reordenar de otra manera
+\end{itemize}
+
 
 \end{document}
