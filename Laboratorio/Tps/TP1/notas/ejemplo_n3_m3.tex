@@ -1,0 +1,133 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage{algorithmicx, algpseudocode, algorithm}
+\usepackage{tikz}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{multicol}
+\usepackage{amssymb}
+\usepackage[paper=a4paper, left=1.5cm, right=1.5cm, bottom=1.5cm, top=1.5cm]{geometry}
+\usepackage{xcolor}
+
+\title{}
+\author{}
+\date{}
+
+\begin{document}
+
+\section*{Discretización}
+Planteo una dsicretización con  $n = 3$ y $m = 3$
+
+\section*{Matriz}
+
+Luego las temperaturas del horno son:
+
+\begin{center}
+    \begin{tabular}{|c|c|c|c|}
+        \hline
+        $t_{00}$ & $t_{10}$ & $t_{20}$ & $t_{30}$ \\
+        \hline
+        $t_{01}$ & $t_{11}$ & $t_{21}$ & $t_{31}$ \\
+        \hline
+        $t_{02}$ & $t_{12}$ & $t_{22}$ & $t_{32}$ \\
+        \hline
+        $t_{03}$ & $t_{13}$ & $t_{23}$ & $t_{33}$ \\
+        \hline
+    \end{tabular}
+\end{center}
+
+\
+
+\begin{itemize}
+    \item[-] Por enunciado tengo que $t_{00} = t_{01} = t_{02} = t_{03} = 1500$
+    \item[-] Adicionalmente, como $\theta_0 = \theta_{n}$, tengo que $t_{00} = t_{03},~t_{10} = t_{13},~t_{20} = t_{23}$ y 
+          $t_{30} = t_{33}$
+    \item[-] Por último, elijo la temperatura para la pared exterior, $t_{30} = t_{31} = t_{32} = t_{33} = 200$
+    \item[-] Con esto las incógnitas a calcular que tengo son: $t_{11},~t_{12},~t_{21},~t_{22},~t_{13},~t_{33}$
+\end{itemize}
+
+\begin{center}
+    \begin{tabular}{|c|c|c|c|}
+        \hline
+        $1500$ & $t_{11}$ & $t_{21}$ & $200$ \\
+        \hline
+        $1500$ & $t_{12}$ & $t_{22}$ & $200$ \\
+        \hline
+        $1500$ & $t_{13}$ & $t_{23}$ & $200$ \\
+        \hline
+    \end{tabular}
+\end{center}
+
+\section*{Ecuación}
+
+La ecuación de calor discretizada para cada $t_{jk}$ es la siguiente:
+
+\begin{align*}
+    T(r_j,\theta_k) =-\frac{[{(\Delta r)}^{-2} - {(r_j\Delta r)}^{-1}]}{[{(r_j\Delta r)}^{-1} - 2{(\Delta r)}^{-2} - 2{(r_{j}\Delta \theta)}^{-2}]}t_{j-1,k}
+    & \\
+    -\frac{[{(r_{j}\Delta \theta)}^{-2}]}{[{(r_j\Delta r)}^{-1} - 2{(\Delta r)}^{-2} - 2{(r_{j}\Delta \theta)}^{-2}]}(t_{j,k-1} + t_{j,k+1})
+    -\frac{[{(\Delta r)}^{-2}]}{[{(r_j\Delta r)}^{-1} - 2{(\Delta r)}^{-2} - 2{(r_{j}\Delta \theta)}^{-2}]}t_{j+1,k}  - t_{jk} &= 0
+\end{align*}
+
+\
+
+\noindent Por comodidad, nombro a cada coeficiente de la siguiente forma:
+
+\begin{align*}
+    &-\frac{[{(\Delta r)}^{-2} - {(r_j\Delta r)}^{-1}]}{[{(r_j\Delta r)}^{-1} - 2{(\Delta r)}^{-2} - 2{(r_{j}\Delta \theta)}^{-2}]}t_{j-1,k}& &= -a\cdot t_{j-1,k} \\
+    &-\frac{[{(r_{j}\Delta \theta)}^{-2}]}{[{(r_j\Delta r)}^{-1} - 2{(\Delta r)}^{-2} - 2{(r_{j}\Delta \theta)}^{-2}]}(t_{j,k-1} + t_{j,k+1})& &= -b\cdot (t_{j,k-1} + t_{j,k+1}) \\
+    &-\frac{[{(\Delta r)}^{-2}]}{[{(r_j\Delta r)}^{-1} - 2{(\Delta r)}^{-2} - 2{(r_{j}\Delta \theta)}^{-2}]}t_{j+1,k}& &= -c\cdot t_{j+1,k}
+\end{align*}
+
+\noindent Con esto ya se puede plantear el sistema de ecuacines para buscar el valor de las incógnitas.
+
+\newpage
+
+\section*{Sistema}
+
+\emph{Nota: Los valores en rojo son aquellos que se encuentran en $r_i$ o $r_e$, por ende al saberse su valor son lost terminos independientes de cada ecuación}
+
+\begin{align*}
+    &\textcolor{red}{-a\cdot t_{01}}& &-b\cdot(t_{13} +t_{12})& &-c\cdot t_{21}& &-t_{11}& &= 0 \\
+    &\textcolor{red}{-a\cdot t_{02}}& &-b\cdot(t_{11} +t_{13})& &-c\cdot t_{22}& &-t_{12}& &= 0 \\
+    &\textcolor{red}{-a\cdot t_{03}}& &-b\cdot(t_{12} +t_{11})& &-c\cdot t_{23}& &-t_{13}& &= 0 \\
+    &-a\cdot t_{11}& &-b\cdot(t_{23} +t_{22})& &~\textcolor{red}{-c\cdot t_{31}}& &-t_{21}& &= 0 \\
+    &-a\cdot t_{12}& &-b\cdot(t_{21} +t_{23})& &~\textcolor{red}{-c\cdot t_{32}}& &-t_{22}& &= 0 \\
+    &-a\cdot t_{13}& &-b\cdot(t_{22} +t_{21})& &~\textcolor{red}{-c\cdot t_{33}}& &-t_{23}& &= 0 \\
+\end{align*}
+
+\section*{Matriz banda}
+
+Reacomodando el sistema me encuentro con que puedo representar la información como una matriz banda:
+
+\
+
+\begin{center}
+    \begin{tabular}{c c c c c c c c}
+        $-t_{11}$ & $-b\cdot t_{12}$ & $-b\cdot t_{13}$ & $-c\cdot t_{21}$ & $0$ & $0$ & $=$ & $a\cdot t_{01}$ \\
+        $-b\cdot t_{11}$ & $-t_{12}$ & $-b\cdot t_{13}$ & $0$ & $-c\cdot t_{22}$ & $0$ & $=$ & $a\cdot t_{02}$ \\
+        $-b\cdot t_{11}$ & $-b\cdot t_{12}$ & $-t_{13}$ & $0$ & $0$ & $-c\cdot t_{33}$ & $=$ & $a\cdot t_{03}$ \\
+        $-a\cdot t_{11}$ & $0$ & $0$ & $-t_{21}$ & $-b\cdot t_{22}$ & $-b\cdot t_{23}$ & $=$ & $a\cdot t_{31}$ \\
+        $0$ & $-a\cdot t_{12}$ & $0$ & $-b\cdot t_{21}$ & $-t_{22}$ & $-b\cdot t_{23}$ & $=$ & $a\cdot t_{32}$ \\
+        $0$ & $0$ & $-a\cdot t_{13}$ & $-b\cdot t_{21}$ & $-b\cdot t_{22}$ & $-t_{23}$ & $=$ & $a\cdot t_{33}$
+    \end{tabular}
+\end{center}
+
+\
+
+de esta manera, la matriz con la que se deberá trabajar es la siguiente:
+
+\
+
+\[
+\begin{bmatrix}
+    -1 & -b & -b & -c & 0 & 0 & | & a \\
+    -b & -1 & -b & 0 & -c & 0 & | & a \\
+    -b & -b & -1 & 0 & 0 & -c & | & a \\
+    -a & 0 & 0 & -1 & -b & -b & | & a \\
+    0 & -a & 0 & -b & -1 & -b & | & a \\
+    0 & 0 & -a & -b & -b & -1 & | & a
+\end{bmatrix}
+\]
+
+\end{document}
