@@ -40,3 +40,7 @@
 *.gz
 *.loa
 *.toc
+
+# Project files
+.ipynb_checkpoints
+.vscode
