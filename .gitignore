@@ -38,3 +38,5 @@
 *.log
 *.pdf
 *.gz
+*.loa
+*.toc
