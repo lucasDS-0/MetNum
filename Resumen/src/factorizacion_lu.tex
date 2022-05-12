@@ -1,0 +1,588 @@
+% factorizacion_lu
+
+Resolver varios sistemas de ecuaciones con Eliminación Gaussiana tiene un costo que pertenece a $O(n^3)$ por cada uno. Hay una manera de evitar esto con una factorización llamada LU.
+
+Sean $A \in \mathbb{R}^{n \times n}$, $L \in \mathbb{R}^{n \times n}$ triangular inferior con unos en su diagonal principal, $U \in \mathbb{R}^{n \times n}$ triangular superior, y por último 
+
+\[A = LU\]
+
+\subsection{Utilidad}
+\label{subsec:utilidad_lu}
+
+Se tiene que $Ax = b$, luego
+
+\[LUx = b\]
+
+y se resuelve en dos etapas:
+
+\[Ly = b\]
+\[Ux = y\]
+
+los cuales son dos sistemas triangulares con un costo de computo que pertenece a $O(n^2)$.
+
+\subsection{Matriz de transformación gaussiana}
+\label{subsec:matriz_de_transformacion_gaussiana}
+
+Sea $A \in \mathbb{R}^{n \times n}$. Supongamos que aplicamos eliminación Gaussiana y se verifica que $a_{ii}^{i - 1}  \neq 0$ para todo $i = 1,\ldots,n-1$.
+
+\
+
+Luego, sea la matriz elemental (tipo2), y $m_{ji} = \frac{a_{ji}^{i-1}}{a_{ii}^{i-1}}$
+
+\[
+E = 
+\begin{bmatrix}
+1 & 0 & 0 & \ldots & 0 \\
+-m_{21} & 1 & 0 & \ldots & 0 \\
+0 & 0 & 1 & \ldots & 0 \\
+\vdots & \vdots & \vdots & \ddots & \vdots \\
+0 & 0 & 0 & \ldots & 1 \\
+\end{bmatrix}
+\]
+
+y con ello puedo realizar:
+
+\[
+\begin{bmatrix}
+1 & 0 & 0 & \ldots & 0 \\
+-m_{21} & 1 & 0 & \ldots & 0 \\
+0 & 0 & 1 & \ldots & 0 \\
+\vdots & \vdots & \vdots & \ddots & \vdots \\
+0 & 0 & 0 & \ldots & 1 \\
+\end{bmatrix}
+\begin{bmatrix}
+a_{11}^{0} & a_{12}^{0} & \ldots & a_{1j}^{0} & \ldots &a_{1n}^{0} \\
+a_{21}^{0} & a_{22}^{0} & \ldots & a_{2j}^{0} & \ldots &a_{2n}^{0} \\
+a_{31}^{0} & a_{32}^{0} & \ldots & a_{3j}^{0} & \ldots &a_{3n}^{0} \\
+\vdots & \vdots & \ddots & \vdots & \ddots & \vdots \\
+a_{n1}^{0} & a_{n2}^{0} & \ldots & a_{nj}^{0} & \ldots &a_{nn}^{0}
+\end{bmatrix}
+=
+\]
+\[
+\begin{bmatrix}
+a_{11}^{0} & a_{12}^{0} & \ldots & a_{1j}^{0} & \ldots &a_{1n}^{0} \\
+a_{21}^{0} -m_{21}a_{11}^{0} & a_{22}^{0}-m_{21}a_{12}^{0} & \ldots & a_{2j}^{0}-m_{21}a_{1j}^{0} & \ldots &a_{2n}^{0}-m_{21}a_{1n}^{0} \\
+a_{31}^{0} & a_{32}^{0} & \ldots & a_{3j}^{0} & \ldots &a_{3n}^{0} \\
+\vdots & \vdots & \ddots & \vdots & \ddots & \vdots \\
+a_{n1}^{0} & a_{n2}^{0} & \ldots & a_{nj}^{0} & \ldots &a_{nn}^{0}
+\end{bmatrix}
+\]
+
+\
+
+lo cual es lo mismo que la operación $F_2 - m_{21}F_1$ de la Eliminación Gaussiana. Con esto se puede pensar en una matriz llamada \emph{primera matriz de la eliminación gaussiana} de la forma
+
+\[
+M^1 =
+\begin{bmatrix}
+1 & 0 & 0 & \ldots & 0 & \ldots & 0 \\
+-m_{21} & 1 & 0 & \ldots & 0 & \ldots & 0 \\
+-m_{31} & 0 & 1 & \ldots & 0 & \ldots & 0 \\
+\vdots & \vdots & \vdots & \ddots & \vdots & \ddots & \vdots \\
+-m_{i1} & 0 & 0 & \ldots & 1 & \ldots & 0 \\
+\vdots & \vdots & \vdots & \ddots & \vdots & \ddots & \vdots \\
+-m_{n1} & 0 & 0 & \ldots & 0 & \ldots & 1 
+\end{bmatrix}
+\]
+
+y con la misma puedo realizar el producto 
+
+\[
+\begin{bmatrix}
+1 & 0 & 0 & \ldots & 0 & \ldots & 0 \\
+-m_{21} & 1 & 0 & \ldots & 0 & \ldots & 0 \\
+-m_{31} & 0 & 1 & \ldots & 0 & \ldots & 0 \\
+\vdots & \vdots & \vdots & \ddots & \vdots & \ddots & \vdots \\
+-m_{i1} & 0 & 0 & \ldots & 1 & \ldots & 0 \\
+\vdots & \vdots & \vdots & \ddots & \vdots & \ddots & \vdots \\
+-m_{n1} & 0 & 0 & \ldots & 0 & \ldots & 1 
+\end{bmatrix}
+\begin{bmatrix}
+a_{11}^{0} & a_{12}^{0} & \ldots & a_{1j}^{0} & \ldots &a_{1n}^{0} \\
+a_{21}^{0} & a_{22}^{0} & \ldots & a_{2j}^{0} & \ldots &a_{2n}^{0} \\
+a_{31}^{0} & a_{32}^{0} & \ldots & a_{3j}^{0} & \ldots &a_{3n}^{0} \\
+\vdots & \vdots & \ddots & \vdots & \ddots & \vdots \\
+a_{i1}^{0} & a_{i2}^{0} & \ldots & a_{ij}^{0} & \ldots &a_{in}^{0} \\
+\vdots & \vdots & \ddots & \vdots & \ddots & \vdots \\
+a_{n1}^{0} & a_{n2}^{0} & \ldots & a_{nj}^{0} & \ldots &a_{nn}^{0}
+\end{bmatrix}
+=
+\]
+\[
+\begin{bmatrix}
+a_{11}^{0} & a_{12}^{0} & \ldots & a_{1j}^{0} & \ldots &a_{1n}^{0} \\
+a_{21}^{0} -m_{21}a_{11}^{0} & a_{22}^{0}-m_{21}a_{12}^{0} & \ldots & a_{2j}^{0}-m_{21}a_{1j}^{0} & \ldots &a_{2n}^{0}-m_{21}a_{1n}^{0} \\
+a_{31}^{0} -m_{31}a_{11}^{0} & a_{32}^{0}-m_{31}a_{12}^{0} & \ldots & a_{3j}^{0}-m_{31}a_{1j}^{0} & \ldots &a_{3n}^{0}-m_{31}a_{1n}^{0} \\
+\vdots & \vdots & \ddots & \vdots & \ddots & \vdots \\
+a_{i1}^{0} -m_{i1}a_{11}^{0} & a_{i2}^{0}-m_{i1}a_{12}^{0} & \ldots & a_{ij}^{0}-m_{i1}a_{1j}^{0} & \ldots &a_{in}^{0}-m_{i1}a_{1n}^{0} \\
+\vdots & \vdots & \ddots & \vdots & \ddots & \vdots \\
+a_{n1}^{0} -m_{n1}a_{11}^{0} & a_{n2}^{0}-m_{n1}a_{12}^{0} & \ldots & a_{nj}^{0}-m_{n1}a_{1j}^{0} & \ldots &a_{nn}^{0}-m_{n1}a_{1n}^{0} \\
+\end{bmatrix}
+\]
+
+\
+
+Lo cual no es más que el primer paso de la Eliminación Gaussiana. De la misma forma, se tiene la i-ésima matriz de la transformación gaussiana para el i-ésimo paso de la eliminación gaussiana 
+
+\[
+M^i =
+\begin{bmatrix}
+1 & \ldots & 0  & 0 & \ldots & 0 \\
+\vdots & \ddots & \vdots & \vdots & \ddots & 0 \\
+0  & \ldots & 1 & 0 & \ldots & 0 \\
+0 & \ldots & -m_{i+1i} & 1 & \ldots & 0 \\
+\vdots  & \ddots & \vdots & \vdots & \ddots & \vdots \\
+0 & \ldots & -m_{ni} & 0 & \ldots & 1 
+\end{bmatrix}
+\]
+
+y se pude realizar el i-ésimo paso de la eliminación gaussiana.
+
+\[
+\begin{bmatrix}
+1 & \ldots & 0  & 0 & \ldots & 0 \\
+\vdots & \ddots & \vdots & \vdots & \ddots & 0 \\
+0  & \ldots & 1 & 0 & \ldots & 0 \\
+0 & \ldots & -m_{i+1i} & 1 & \ldots & 0 \\
+\vdots  & \ddots & \vdots & \vdots & \ddots & \vdots \\
+0 & \ldots & -m_{ni} & 0 & \ldots & 1 
+\end{bmatrix}
+\begin{bmatrix}
+a_{11}^{i-1} & \ldots & a_{1i}^{i-1} & \ldots & a_{1n}^{i-1} \\
+\vdots & \ddots & \vdots & \ddots & \vdots \\
+0 & \ldots & a_{ii}^{i-1} & \ldots & a_{in}^{i-1} \\
+0 & \ldots & a_{i+1i}^{i-1} & \ldots & a_{i+1n}^{i-1} \\
+\vdots & \ddots & \vdots & \ddots & \vdots \\
+0 & \ldots & a_{ni}^{i-1} & \ldots & a_{nn}^{i-1} \\
+\end{bmatrix}
+=
+\]
+\[
+\begin{bmatrix}
+a_{11}^{i-1} & a_{12}^{i-1} & \ldots & a_{1i}^{i-1} & \ldots & a_{1n}^{i-1} \\
+0 & a_{22}^{i-1} & \ldots & a_{2i}^{i-1} & \ldots & a_{2n}^{i-1} \\
+\vdots & \vdots & \ddots & \vdots & \ddots & \vdots \\
+0 & 0 & \ldots & a_{ii}^{i-1} & \ldots & a_{in}^{i-1} \\
+0 & 0 & \ldots & a_{i+1i}^{i-1}-m_{i+1i}a_{ii}^{i-1} & \ldots & a_{i+1n}^{i-1}-m_{i+1i}a_{in}^{i-1} \\
+\vdots & \vdots & \ddots & \vdots & \ddots & \vdots \\
+0 & 0 & \ldots & a_{ni}^{i-1}-m_{ni}a_{ii}^{i-1} & \ldots & a_{nn}^{i-1}-m_{ni}a_{in}^{i-1}
+\end{bmatrix}
+\]
+
+\subsection{Método de Eliminación Gaussiana}
+\label{subsec:metodo_de_eliminacion_gaussiana}
+
+Con lo visto en la sección previa, se puede observar que el producto de las distintas $M^i$ con A, realizan el algoritmo de Eliminación Gaussiana visto en la sección \ref{subsec:algotimo_de_eliminacion_gaussiana}, obteniéndose una matriz triangular superior
+
+\[
+M^{n-1}M^{n-2}\cdots M^{1}A = U ~\text{con $U$ triangular superior}
+\]
+
+\
+
+Un dato \emph{importante} de todo esto es que se asume que $a_{ii}^{i-1} \neq 0$ para todo $i = 1,\ldots,n$.
+
+\subsection{Propiedades de la matriz de transformación gaussiana}
+
+Tengo que puedo ver a $M^i$ como
+
+\[
+M^i =
+\begin{bmatrix}
+1 & \ldots & 0  & 0 & \ldots & 0 \\
+\vdots & \ddots & \vdots & \vdots & \ddots & 0 \\
+0  & \ldots & 1 & 0 & \ldots & 0 \\
+0 & \ldots & -m_{i+1i} & 1 & \ldots & 0 \\
+\vdots  & \ddots & \vdots & \vdots & \ddots & \vdots \\
+0 & \ldots & -m_{ni} & 0 & \ldots & 1 
+\end{bmatrix}
+=
+I -
+\begin{bmatrix}
+0 \\
+\vdots \\
+m_{i+1i} \\
+\vdots \\
+m_{ni}
+\end{bmatrix}
+\begin{bmatrix}
+0 & \ldots & 1 & \ldots & 0
+\end{bmatrix}
+\]
+
+es decir 
+
+\[M^i = I - m_{i}^{t}e_i\]
+
+con $m_i = (0, \ldots, m_{i+1i},\ldots,m_{ni})$ y $e_i$ el i-ésimo vector canónico.
+
+\noindent Y se tienen las siguientes propiedades:
+
+\begin{itemize}
+    \item $M^i$ es triangular inferior.
+    \item $M^i$ es inversible.
+\end{itemize}
+
+Veamos un poco esta segunda propiedad
+
+\[(I - m_{i}^{t}e_i)(I + m_{i}^{t}e_i) = I + m_{i}^{t}e_i - m_{i}^{t}e_i - m_{i}^{t}e_im_{i}^{t}e_i = I - m_{i}^{t}e_im_{i}^{t}e_i\]
+
+\[\text{pero}~ e_{i}m_{i}^{t} = 
+\begin{bmatrix}
+0 & \ldots & 1 & \ldots & 0
+\end{bmatrix}
+\begin{bmatrix}
+0 \\
+\vdots \\
+m_{i+1i} \\
+\vdots \\
+m_{ni}
+\end{bmatrix}
+= 0
+\]
+
+\
+
+Entonces tengo que $(I - m_{i}^{t}e_i)(I + m_{i}^{t}e_i) = I \implies {(M^{i})}^{-1} = {(I - m_{i}^{t}e_i)}^{-1} = I + m_{i}^{t}e_i$.
+
+y observando esto se tiene que
+
+\[M^{n-1}M^{n-2}\cdots M^{1}A = U\]
+\[A = {(M^1)}^{-1}{(M^2)}^{-1}\cdots{(M^{n-1})}^{-1}U\]
+\[A=(I+m_{1}^{t}e_1)(I+m_{2}^{t}e_2)\cdots(I + m_{n-1}^{t}e_{n-1})U\]
+
+y se puede observar que $m_{i}^{t}e_{i}m_{j}^{t}e_{j} = 0$ si $i < j$, con esto
+
+\[A = (I + m_{1}^{t}e_{1} + m_{2}^{t}e_{2} + \cdots + m_{n-1}^{t}e_{n-1})U = LU\]
+
+luego
+
+\[
+\begin{bmatrix}
+a_{11} & a_{12} & \ldots & a_{1i} & \ldots & a_{1n} \\
+a_{21} & a_{22} & \ldots & a_{2i} & \ldots & a_{2n} \\
+\vdots & \vdots & \ddots & \vdots & \ddots & \vdots \\
+a_{i1} & a_{i2} & \ldots & a_{ii} & \ldots & a_{in} \\
+\vdots & \vdots & \ddots & \vdots & \ddots & \vdots \\
+a_{n1} & a_{n2} & \ldots & a_{ni} & \ldots & a_{nn}
+\end{bmatrix}
+=
+\begin{bmatrix}
+1 & 0 & \ldots & 0 & \ldots & 0 \\
+m_{21} & 1 & \ldots & 0 & \ldots & 0 \\
+\vdots & \vdots & \ddots & \vdots & \ddots & \vdots \\
+m_{i1} & m_{i2} & \ldots & 1 & \ldots & 0 \\
+\vdots & \vdots & \ddots & \vdots & \ddots & \vdots \\
+m_{n1} & m_{n2} & \ldots & m_{ni} & \ldots & 1
+\end{bmatrix}
+\begin{bmatrix}
+u_{11} & u_{12} & \ldots & u_{1i} & \ldots & u_{1n} \\
+0 & u_{22} & \ldots & u_{2i} & \ldots & u_{2n} \\
+\vdots & \vdots & \ddots & \vdots & \ddots & \vdots \\
+0 & 0 & \ldots & a_{ii} & \ldots & u_{in} \\
+\vdots & \vdots & \ddots & \vdots & \ddots & \vdots \\
+0 & 0 & \ldots & 0 & \ldots & u_{nn}
+\end{bmatrix}
+\]
+
+\subsection{Propiedades de LU}
+\label{subsec:propiedades_de_lu}
+
+\begin{itemize}
+    \item La factorización LU está asociada a la Eliminación Gaussiana sin necesidad de intercambio de filas. Se verifica que $l_{ii} = 1$ para todo $i = 1,\ldots,n$.
+    \item No toda matriz tiene factorización LU, por ejemplo 
+    $\begin{bmatrix}
+    0 & 1 \\
+    1 & 0
+    \end{bmatrix}$
+    \item Si $A \in \mathbb{R}^{n \times n}$ tiene todas sus submatrices principales no singulares, entonces tiene factorización LU.  \emph{Idea} de demostración por inducción:
+    \begin{itemize}
+        \item Caso Base: Si $n=2$ tengo 
+        \[A_2 = 
+        \begin{bmatrix}
+            a_{11} & a_{12} \\
+            a_{21} & a_{22}
+        \end{bmatrix}
+        \]
+        \
+        si se puede realizar Eliminación Gaussiana, es porque $a_{11} \neq 0$. Entonces es válido.
+        \item Caso inductivo: La \emph{hipótesis inductiva} que se toma es que vale para $A_{n}$, siendo la misma:
+        \[
+        A_{n} =
+        \begin{bmatrix}
+            a_{11} & \ldots & a_{1n} \\
+            \vdots & \ddots & \vdots \\
+            a_{n1} & \ldots & a_{nn}
+        \end{bmatrix}
+        \]
+        
+        \        
+        
+        Luego, quiero ver que vale que para $A_{n+1}$. En particular, si toma la submatriz principal de orden $n$, cumple con todas las hipótesis necesarias para poder afirmar que 
+        \[A_{n} = L_{n}U_{n},\]
+        y ahora quiero ver que 
+        \[A_{n+1} = L_{n+1}U_{n+1},\]
+        donde tengo que $L_{n+1}$ y $U_{n+1}$ son de la forma
+        \[
+        L_{n+1} =
+        \begin{bmatrix}
+            L_n & 0 \\
+            l_{n+1}^{t} & 1
+        \end{bmatrix}
+        ~~~~~~~~~~~~~~~~~~
+        U_{n+1} =
+        \begin{bmatrix}
+            U_{n} & u_{n+1} \\
+            0^t & u_{n+1n+1}
+        \end{bmatrix}
+        \]
+        para averiguar esto necesito analizar la siguiente igualdad
+        \[
+        A_{n+1} = 
+        \begin{bmatrix}
+            A_n & c_{n+1} \\
+            f_{n+1}^{t} & a_{n+1n+1}
+        \end{bmatrix}
+        ~
+        \overset{?}{=}
+        ~
+        \begin{bmatrix}
+            L_n & 0 \\
+            l_{n+1}^{t} & 1
+        \end{bmatrix}
+        \begin{bmatrix}
+            U_{n} & u_{n+1} \\
+            0^t & u_{n+1n+1}
+        \end{bmatrix}
+        =
+        \begin{bmatrix}
+            L_{n}U_{n} & L_{n}u_{n+1} \\
+            l_{n+1}^{t}U_{n} & l_{n+1}^{t}u_{n+1} + u_{n+1n+1}
+        \end{bmatrix}
+        \]
+        y lo único que falta para que esto se cumpla es que
+        \begin{itemize}
+            \item[-] $c_{n+1} = L_{n}u_{n+1}$
+            \item[-] $f_{n+1}^{t} = l_{n+1}^{t}U_{n}$
+            \item[-] $a_{n+1n+1} = l_{n+1}^{t}u_{n+1} + u_{n+1n+1}$
+        \end{itemize}
+        
+    \end{itemize}
+    \item Si $A \in \mathbb{R}^{n \times n}$ es no singular y existe factorización LU, entonces es única.
+    \item Si $A$ es inversible con factorización LU, entonces se puede aplicar Eliminación Gaussiana sin pivoteo.
+    \item Si $A \in \mathbb{R}^{n \times n}$ es estrictamente diagonal dominante, entonces tiene factorización LU. \emph{Idea} de demostración: 
+    
+    \
+    
+    Para esto se puede probar que si $A$ es una matriz estrictamente diagonal dominante, entonces es inversible. Esto lo pruebo por el absurdo, supongo que $A$ no es inversible, es decir, existe $x^{*} \neq 0$ tal que $Ax^{*} = 0$ (con esto sus filas son linealmente dependientes).
+    
+    \[\text{como $x^{*} \neq 0$,}~ \exists x_{k}^{*} \in x ~:~ |x_{k}^{*}| = \underset{1 \leq i \leq n}{max}|x_{i}^{*}| > 0\]
+    y hasta acá tengo que
+    \[\begin{bmatrix}
+    a_{k1}, & a_{k2}, & \ldots, & a_{kn}    
+    \end{bmatrix}
+    \begin{bmatrix}
+        x_{1}^{*} \\
+        x_{2}^{*} \\
+        \vdots \\
+        x_{n}^{*}
+    \end{bmatrix}
+    = 
+    \sum_{j =1}^{n} a_{kj}x_{j}^{*} = 0
+    \]
+    lo cual es lo mismo que
+    \[a_{kk}x_{k}^{*} + \sum_{j=1, j\neq k}^{n}a_{kj}x_{j}^{*} = 0\] 
+    \[a_{kk}x_{k}^{*} = - \sum_{j=1, j\neq k}^{n}a_{kj}x_{j}^{*}\] 
+    y aplicando módulo a ambos lados
+    \[|a_{kk}||x_{k}^{*}| = |\sum_{j=1, j\neq k}^{n}a_{kj}x_{j}^{*}| \leq \sum_{j=1, j\neq k}^{n}|a_{kj}||x_{j}^{*}|\]
+    y con esto, como $x_{kk}^{*} \neq 0$ y $\frac{|x_{j}^{*}|}{|x_{k}^{*}|}\leq 1$
+    \[|a_{kk}| \leq \sum_{j=1, j\neq k}^{n}|a_{kj}|\frac{|x_{j}^{*}|}{|x_{k}^{*}|} \leq \sum_{j=1, j \neq k}^{n}|a_{kj}|\] 
+    pero esto resulta absurdo,pues en dicho caso, $A$ no sería estrictamente diagonal dominante.
+    
+    \
+    
+    Luego, como todas las matrices principales de $A$ son estrictamente diagonal dominantes, son inversibles, y entonces $A$ tiene factorización $LU$.
+    
+    \item Toda matriz estrictamente diagonal dominante tiene todas sus submatrices principales diagonal dominantes.
+    
+    \item Si a una matriz $A$ estrictamente diagonal dominante se le aplica el primer paso de la Eliminación Gaussiana, su submatriz principal resultante también es estrictamente diagonal dominante. \emph{Idea} de demostración:
+    
+    Hay que tener en cuenta que los coeficientes cambia de la forma 
+    
+    \[a_{ij}^{1} = a_{ij}^{0} - \frac{a_{i1}^{0}}{a_{11}^{0}}\cdot a_{1j}^{0}\]
+    
+    y quiero ver que 
+    \[\sum_{j = 2, j \neq i}^{n} |a_{ij}^{1}| < |a_{ii}^{1}|\]
+    
+    procedo a probarlo
+    
+    \[\sum_{j = 2, j \neq i}^{n} |a_{ij}^{1}| =  \sum_{j=2,j \neq i}^{n}|a_{ij}^{0} - \frac{a_{i1}^{0}}{a_{11}^{0}}\cdot a_{1j}^{0}| \leq \sum_{j=2,j \neq i}^{n}|a_{ij}^{0}| + \sum_{j=2,j \neq i}^{n} |\frac{a_{i1}^{0}}{a_{11}^{0}}\cdot a_{1j}^{0}| < |a_{ii}^{0}|-|a_{i1}^{0}| + \frac{|a_{i1}^{0}|}{|a_{11}^{0}|}\cdot\sum_{j=2, j \neq i}^{n}|a_{1j}^{0}|\]
+    y luego se tiene 
+    \[< |a_{ii}^{0}|-|a_{i1}^{0}| + \frac{|a_{i1}^{0}|}{|a_{11}^{0}|}\cdot (|a_{11}^{0}| - |a_{1i}^{0}|) = |a_{ii}^{0}| - \frac{|a_{i1}^{0}|}{|a_{11}^{0}|}\cdot |a_{1i}^{0}| \leq |a_{ii}^{0} - \frac{|a_{i1}^{0}|}{|a_{11}^{0}|}\cdot |a_{1i}^{0}| = |a_{ii}^{1}|\]
+    y con esto se concluye que
+    \[\sum_{j = 2, j \neq i}^{n} |a_{ij}^{1}| < |a_{ii}^{1}|\]
+    \item Si $A$ es estrictamente diagonal dominante, su factorización LU es única.
+\end{itemize}
+
+\subsection{Factorización PLU}
+\label{subsec:factorizacion_plu}
+
+En el caso de que exista $i = 1,\ldots,n$ para el cual $a_{ii}^{i-1} = 0$, se puede continuar la Eliminación Gaussiana mediante permutación de filas y obtener una factorización LU de la matriz original permutada, de la forma 
+
+\[PA = LU\]
+
+siendo $P$ la matriz de permutación que establece como se intercambiaron las filas.
+
+\subsection{Enunciados de la guía práctica}
+\label{subsec:enunciados_guia_2}
+
+\subsubsection{Ejercicio 5}
+\label{subsubsec:guia_2_ej_5}
+
+Sean $A_1,\ldots,A_k \in \mathbb{R}^{n \times n}$ tales que $A_h = L_h U$ es una factorización $LU$ de $A_h~\forall h$ ($U$ es la misma para todas). Sea $A = \sum_{h=1}^{k}A_h$, probar:
+\begin{itemize}
+    \item[a.] $A$ tiene factorización $LU$.
+    
+    Tengo que 
+    
+    \[A = \sum_{h=1}^{k}A_h = \sum_{h=1}^{k}(L_h U) = (\sum_{h=1}^{k}L_h)U = \underbrace{\frac{1}{k}\cdot(\sum_{h=1}^{k}L_h)}_{\widetilde{L}}\overbrace{k\cdot U}^{\widetilde{U}}\]
+    
+    Luego, como $\widetilde{L}$ es triangular inferior con unos en su diagonal principal y $\widetilde{U}$ es triangular superior, $A$ tiene factorización $LU$, $A = \widetilde{L}\widetilde{U}$ 
+    
+    \item[b.] Para $1 \leq i,j, \leq n$, los $m_{ij}$ de la triangulación gaussiana de $A$ son el promedio de los $m_{ij}^{h}$
+    
+    Tengo que cada $L_h$ es de la forma 
+    
+    \[
+    L_h =
+    \begin{bmatrix}
+        1 & 0 & \ldots & \ldots & 0 \\
+        m_{21}^{h} & 1 & \ddots &  & \vdots \\
+        \vdots & \ddots & \ddots & \ddots & \vdots \\
+        \vdots &  & \ddots & 1 & 0 \\
+        m_{n1}^{h} & \ldots & \ldots & m_{nn-1}^{h} & 1 \\
+    \end{bmatrix}
+    \]
+    
+    y tengo que $\widetilde{L}$ es de la forma 
+    
+    \[
+    \widetilde{L} ~=~ \frac{1}{k}\sum_{h = 1}^{k}L_h ~=~
+    \begin{bmatrix}
+        1 & 0 & \ldots & \ldots & 0 \\
+        \frac{\sum_{h=1}^{k}m_{21}^{h}}{k} & 1 & \ddots &  & \vdots \\
+        \vdots & \ddots & \ddots & \ddots & \vdots \\
+        \vdots &  & \ddots & 1 & 0 \\
+        \frac{\sum_{h=1}^{k}m_{n1}^{h}}{k} & \ldots & \ldots & \frac{\sum_{h=1}^{k}m_{nn-1}^{h}}{k} & 1 \\
+    \end{bmatrix}
+    \]
+    
+    donde cada $m_{ij} = \frac{\sum_{h=1}^{k}m_{ij}^{h}}{k}$
+\end{itemize}
+
+\subsubsection{Ejercicio 9}
+\label{subsubsec:guia_2_ej_9}
+
+Sea $A \in \mathbb{R}^{n \times n}$ inversible, $A = TS$, con $T$ triangular inferior y $S$ triangular superior. Probar:
+
+\begin{itemize}
+    \item[a.] $T$ y $S$ son inversibles.
+    
+    Como $A$ es inversible, se tiene que $det(A) \neq 0$, luego
+    
+    \[0 \neq det(A) = det(TS) = det(T)det(S) \implies det(T) \neq 0 \land det(S) \neq 0\]
+    
+    lo cual implica que $T$ es inversible y $S$ es inversible.
+    
+    \item[b.] $A$ tiene $LU$.
+    
+    Si tomo (por ejemplo)
+    
+    \[
+    D_1 = 
+    \begin{bmatrix}
+        \frac{1}{2} & 0 \\
+        0 & \frac{1}{4}
+    \end{bmatrix}
+    ~~~~~~~~~~~~~~~~
+    D_2 = 
+    \begin{bmatrix}
+        2 & 0 \\
+        0 & 4
+    \end{bmatrix}
+    \]
+    
+    tengo que $D_1 D_2 = I$, y luego
+    
+    \[A = TS = TIS = T(D_1 D_2)S = (TD_1)(D_2 S).\]
+    
+    con esto, sean $D_1 , D_2 \in \mathbb{R}^{n \times n}$ diagonales, con ${(D_1)}_{ii} =  \frac{1}{T_{ii}}$ y con ${(D_2)}_{ii} = T_{ii}$. Donde $D_1 D_2 = I$.
+    
+    don lo que $A = TS = TIS = \underbrace{TD_1}_{L}\underbrace{D_2 S}_{U}$. Luego, quiero ver que esto es una factorización $LU$.
+    
+    Tengo que $L$ es triangular inferior con unos en su diagonal y $U$ triangular superior. Adicionalmente
+    
+    \[(L)_{ii} = \underbrace{fila_i(T)}_{(*,T_{ii},0)}\cdot \underbrace{columna_i(D_1)}_{(0,\frac{1}{T_{ii}},0)} = 1 ~~\forall i = 1,\ldots,n\]
+    
+    con lo que se encontró $L = TD_1$ triangular inferior con unos en la diagonal y $U = D_2 S$ triangular superior, de forma que $A = LU$.
+    
+    \item[c.] La matriz $\begin{bmatrix}
+        A & b \\
+        c^t & d
+    \end{bmatrix}$ tiene $LU$ para cualquier $b \in \mathbb{R}^{n}$, $c^t \in \mathbb{R}^n$ y $d \in \mathbb{R}$, y hallarla.
+    
+    Sean
+    
+    \[
+    \widetilde{L} =
+    \begin{bmatrix}
+        L_{11} & 0 \\
+        l_{21}^{t} & 1
+    \end{bmatrix}
+    ~~~~~~~~~~~~~~~
+    \widetilde{U} =
+    \begin{bmatrix}
+        U_{11} & u_{12} \\
+        0^{t} & u_{22}
+    \end{bmatrix}
+    \]
+    
+    Se necesita que $L_{11}$ sea triangular inferior con unos en su diagonal, y $U_{11}$ sea triangular superior. Luego,
+    
+    \begin{itemize}
+        \item $A = L_{11}U_{11}$
+        \item $b = L_{11}u_{12}$
+        \item $c^{t} = l_{21}^{t}U_{11}$
+        \item $d = l_{21}^{t}u_{12} + u_{22}$
+    \end{itemize}
+    
+    y como sé que $A$ es inversible y tiene factorización $LU$, tengo que $L_{11} = TD_1$ y $U = D_2 S$ . Con ello, teniendo en cuenta que $D_{1}^{-1} = D_2$,
+    
+    \begin{itemize}
+        \item $b = L_{11}u_{12} \implies D_2 T^{-1}b = D_2 T^{-1}L_{11}u_{12} = D_2 T^{-1}TD_{1}u_{12} \implies u_{12} = D_2 T^{-1}b$
+        \item $c^{t} = l_{21}^{t}U_{11} \implies c^{t}S^{-1}D_1 = l_{21}^{t}D_2 SS^{-1}D_1 \implies c^{t}S^{-1}D_1 = l_{21}^{t}$
+        \item $u_{22} = d - l_{21}^{t}u_{12} = d- c^{t}S^{-1}D_1 D_2 T^{-1}b = d - c^{t}S^{-1}T^{-1}b = d - c^{t}{(TS)}^{-1}b = d - c^{t}A^{-1}b$
+    \end{itemize}
+    
+    Luego, se puede ver que obtuve $\widetilde{L}$ triangular inferior con unos en su diagonal y $\widetilde{U}$ triangular de forma que
+    
+    \[
+    \begin{bmatrix}
+        TD_1 & 0 \\
+        c^{t}S^{-1}D_1 & 1
+    \end{bmatrix}
+    \begin{bmatrix}
+        D_2 S & D_2 T^{-1}b \\
+        0^{t} & d - c^{t}A^{-1}b
+    \end{bmatrix}
+    = \ldots =
+    \begin{bmatrix}
+        A & b \\
+        c^{t} & d
+    \end{bmatrix}
+    \]
+    
+    con lo que se encontró una factorización $LU$.
+    
+\end{itemize}

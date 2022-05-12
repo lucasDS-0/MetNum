@@ -1,0 +1,139 @@
+% eliminacion_gaussiana
+
+\subsection{Sistemas de ecuaciones generales}
+\label{subsec:sistemas_de_ecuaciones_generales}
+
+Cuando el sistema de ecuaciones no es de las formas presentadas en la sección \ref{subsec:sistemas_de_ecuaciones_faciles}, se puede construir un sistema equivalente al que se quiere resolver cuya matriz asociada sea más fácil de resolver.
+
+\
+
+Esto se logra sumando y restando ecuaciones, multiplicando ecuaciones por un escalar, y permutando ecuaciones. En particular, el método por defecto que se utiliza para ello es conocido como \emph{Eliminación Gaussiana}.
+
+\subsection{Algoritmo de Eliminación Gaussiana}
+\label{subsec:algotimo_de_eliminacion_gaussiana}
+
+Sean $A \in \mathbb{R}^{n \times n}$, y $b \in \mathbb{R}^n$.
+
+\begin{itemize}
+    \item Primer paso:
+    \[
+    \begin{bmatrix}
+    a_{11}^{0} & a_{12}^{0} & \ldots & a_{1n}^{0} & | & b_{1}^{0} \\
+    \vdots & \vdots & \ddots & \vdots & | & \vdots \\
+    a_{i1}^{0} & a_{i2}^{0} & \ldots & a_{in}^{0} & | & b_{i}^{0} \\
+    \vdots & \vdots & \ddots & \vdots & | & \vdots \\
+    a_{n1}^{0} & a_{n2}^{0} & \ldots & a_{nn}^{0} & | & b_{n}^{0}
+    \end{bmatrix}
+    \to
+    \begin{matrix}
+    F_2 - (a_{21}^{0}/a_{11}^{0})F_1 \\
+    \vdots \\
+    F_i - (a_{i1}^{0}/a_{11}^{0})F_1 \\
+    \vdots \\
+    F_n - (a_{n1}^{0}/a_{11}^{0})F_1
+    \end{matrix}
+    \to
+    \begin{bmatrix}
+    a_{11}^{1} & a_{12}^{1} & \ldots & a_{1n}^{1} & | & b_{1}^{1} \\
+    \textcolor{red}{0} & a_{22}^{1} & \ldots & a_{2n}^{1} & | & b_{2}^{1} \\
+    \textcolor{red}{\vdots} & \vdots & \ddots & \vdots & | & \vdots \\
+    \textcolor{red}{0} & a_{i2}^{1} & \ldots & a_{in}^{1} & | & b_{i}^{1} \\
+    \textcolor{red}{\vdots} & \vdots & \ddots & \vdots & | & \vdots \\
+    \textcolor{red}{0} & a_{n2}^{1} & \ldots & a_{nn}^{1} & | & b_{n}^{1}
+    \end{bmatrix}
+    \]
+    \item Paso i-ésimo:
+    \[
+    \begin{bmatrix}
+    a_{11}^{i-1} & a_{12}^{i-1} & \ldots & a_{1i}^{i-1} & \ldots & a_{1n}^{i-1} & | & b_{1}^{i-1} \\
+    \textcolor{red}{0} & a_{22}^{i-1} & \ldots & a_{2i}^{i-1} & \ldots  & a_{2n}^{i-1} & | & b_{2}^{i-1} \\
+    \textcolor{red}{\vdots} & \textcolor{red}{\vdots} & \textcolor{red}{\ddots} & \vdots & \ddots  & \vdots & | & \vdots \\
+    \textcolor{red}{0} & \textcolor{red}{0} & \textcolor{red}{\ldots} & a_{ii}^{i-1} & \ldots & a_{in}^{i-1} & | & b_{i}^{i-1} \\
+    \textcolor{red}{\vdots} & \textcolor{red}{\vdots} & \textcolor{red}{\ddots} & \vdots & \ddots & \vdots & | & \vdots \\
+    \textcolor{red}{0} & \textcolor{red}{0} & \textcolor{red}{\ldots} & a_{ni}^{i-1} & \ldots & a_{nn}^{i-1} & | & b_{n}^{i-1}
+    \end{bmatrix}
+    ~~~~~~~~~~~
+    \to
+    ~~~~~~~~~~~
+    \begin{matrix}
+    F_{i+1} - (a_{i+1i}^{i-1}/a_{ii}^{i-1})F_i \\
+    \vdots \\
+    F_n - (a_{ni}^{i-1}/a_{ii}^{i-1})F_i
+    \end{matrix}
+    \]
+    
+    \    
+    \[
+    \to
+    ~~~~~~~~~~~
+    \begin{bmatrix}
+    a_{11}^{i} & a_{12}^{i} & \ldots & a_{1i}^{i} & a_{1i+1}^{i} & \ldots & a_{1n}^{i} & | & b_{1}^{i} \\
+    \textcolor{red}{0} & a_{22}^{i} & \ldots & a_{2i}^{i} & a_{2i+1}^{i} & \ldots  & a_{2n}^{i} & | & b_{2}^{i} \\
+    \textcolor{red}{\vdots} & \textcolor{red}{\vdots} & \textcolor{red}{\ddots} & \vdots & \vdots & \ddots  & \vdots & | & \vdots \\
+    \textcolor{red}{0} & \textcolor{red}{0} & \textcolor{red}{\ldots} & a_{ii}^{i} & a_{ii+1}^{i} & \ldots & a_{in}^{i} & | & b_{i}^{i} \\
+    \textcolor{red}{0} & \textcolor{red}{0} & \textcolor{red}{\ldots} & \textcolor{red}{0}& a_{i+1i+1}^{i} & \ldots & a_{i+1n}^{i} & | & b_{i+1}^{i} \\
+    \textcolor{red}{\vdots} & \textcolor{red}{\vdots} & \textcolor{red}{\ddots} & \textcolor{red}{\vdots}& \vdots & \ddots & \vdots & | & \vdots \\
+    \textcolor{red}{0} & \textcolor{red}{0} & \textcolor{red}{\ldots} & \textcolor{red}{0} & a_{ni+1}^{i} & \ldots & a_{nn}^{i} & | & b_{n}^{i1}
+    \end{bmatrix}
+    \]
+    
+    \item Último paso:
+    \[
+    \begin{bmatrix}
+    a_{11}^{n-1} & a_{12}^{n-1} & \ldots & a_{1i}^{n-1} & \ldots & a_{1n}^{n-1} & | & b_{1}^{n-1} \\
+    \textcolor{red}{0} & a_{22}^{n-1} & \ldots & a_{2i}^{n-1} & \ldots  & a_{2n}^{n-1} & | & b_{2}^{n-1} \\
+    \textcolor{red}{\vdots} & \textcolor{red}{\vdots} & \ddots & \vdots & \ddots & \vdots & | & \vdots \\
+    \textcolor{red}{0} & \textcolor{red}{0} & \textcolor{red}{\ldots} & a_{ii}^{n-1} & \ldots & a_{in}^{n-1} & | & b_{i}^{n-1} \\
+    \textcolor{red}{\vdots} & \textcolor{red}{\vdots} & \textcolor{red}{\ddots} & \textcolor{red}{\vdots}& \ddots & \vdots & | & \vdots \\
+    \textcolor{red}{0} & \textcolor{red}{0} & \textcolor{red}{\ldots} & \textcolor{red}{0} & \textcolor{red}{\ldots} & a_{nn}^{n-1} & | & b_{n}^{n-1}
+    \end{bmatrix}
+    \]
+\end{itemize}
+
+\newpage
+
+\subsubsection{Esquema básico}
+\label{subsubsec:eg_esquema_basico}
+
+Con la condición necesaria de que $a_{ii}^{i-1} \neq 0$ para todo $i = 1,\ldots,n-1$.
+
+\begin{algorithm}
+\begin{algorithmic}
+\caption{Eliminación Gaussiana}
+\label{alg:eg}
+\For{$i = 1,\ldots,n-1$}
+    \For{$j = i+1,\ldots,n$}
+        \State $m_{ji} \gets a_{ji}^{i-1}/a_{ii}^{i-1}$ \Comment{\emph{1 (c)ociente}}
+        \For{$k = i,\ldots,n+1$}
+            \State $a_{jk}^{i} \gets a_{jk}^{i-1} - m_{ji}\cdot a_{ik}^{i-1}$ \Comment{\emph{1 (p)roducto, 1 (r)esta}}
+        \EndFor    
+    \EndFor
+\EndFor
+\end{algorithmic}
+\end{algorithm}
+
+Si se hace el conteo de operaciones se tiene que
+
+\[
+\sum_{i=1}^{n-1} (n-i)\cdot c + (n-i)(n-i+2)\cdot p + (n-i)(n-i + 2)\cdot r ~~~~~~\in~ O(n^3)
+\]
+
+Si en el paso i-ésimo nos encontramos con $a_{ii}^{i-1} = 0$, pueden darse dos posibles situaciones:
+\begin{itemize}
+    \item $a_{ji}^{i-1} = 0$ para todo $j = i+1$ a $n$. En este caso, la columna i-ésima desde la posición $i+1$ a la $n$ ya tiene los coeficientes nulos, por lo cual puede procederse al próximo paso del algoritmo.
+    \item Existe $a_{j'i}^{i-1} \neq 0$ para algún $j' \geq i+1$. En este caso, basta permutar la fila $i$ con la $j'$ y continuar con el algoritmo.
+\end{itemize}
+
+\subsection{Estrategias de pivoteo}
+\label{subsec:estrategias_de_pivoteo}
+
+Es deseable evitar errores generados por trabajar con aritmética finita, para ello se pueden utilizar algunas estrategias de pivoteo.
+
+\begin{itemize}
+    \item Pivoteo parcial: Entre las filas $i$ a $n$, utilizar como fila \emph{pivote} aquella con mayor $|a_{ji}^{i-1}|$. Realizar la permutación necesaria entre las filas para ubicar en el lugar $ii$ dicho coeficiente.
+    \item Pivoteo completo: Entre las filas $i$ a $n$ y las columnas $i$ a $n$, calcular el mayor $|a_{kl}^{i-1}|$. Realizar la permutación necesaria entre las filas y columnas para ubicar en el lugar $ii$ dicho coeficiente.
+\end{itemize}
+
+
+
+

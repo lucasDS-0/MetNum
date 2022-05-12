@@ -1,0 +1,184 @@
+% sistemas_lineales
+
+Un sistema lineal, se plantea frente a una operación matricial compuesto (por ejemplo) de $A \in \mathbb{R}^{n\times n}$, $b \in \mathbb{R}^{n}$, y se busca $x \in \mathbb{R}^{n}$ tal que $Ax = b$.
+
+\
+
+Donde estos elements son de la forma
+
+\[
+A = 
+\begin{bmatrix}
+a_{11} & a_{12} & \ldots & a_{1n} \\
+a_{21} & a_{22} & \ldots & a_{2n} \\
+\vdots & \vdots & \ddots & \vdots \\
+a_{n1} & a_{n2} & \ldots & a_{nn} \\
+\end{bmatrix}
+~~~~~~~~~~~~~~
+b =
+\begin{bmatrix}
+b_1 \\
+b_2 \\
+\vdots \\
+b_n 
+\end{bmatrix}
+~~~~~~~~~~~~~~
+x = 
+\begin{bmatrix}
+x_1 \\
+x_2 \\
+\vdots \\
+x_n
+\end{bmatrix}
+\]
+
+y se plantea el sistema de ecuaciones
+
+\[
+\begin{matrix}
+a_{11}x_{1} + & a_{12}x_{2} + & \ldots & a_{1n}x_n & = b_1 \\
+a_{21}x_{1} + & a_{22}x_{2} + & \ldots & a_{2n}x_n & = b_2 \\
+\vdots & \vdots & \ddots & \vdots & \vdots \\
+a_{n1}x_{1} + & a_{n2}x_{2} + & \ldots & a_{nn}x_n & = b_n
+\end{matrix}
+\]
+
+\subsection{Soluciones y Sistemas equivalentes}
+\label{subsec:soluciones_y_sistemas_equivalentes}
+
+
+\begin{itemize}
+    \item Si $rang(A) = n \implies$ existe un única solución
+    \item Si $rang(A) < n$:
+    \begin{itemize}
+        \item Si $b \notin Im(A) \implies$ el sistema no tiene solución.
+        \item Si $b \in Im(A) \implies$, el sistema tiene infinitas soluciones. 
+    \end{itemize}
+\end{itemize}
+
+Sean $A \in \mathbb{R}^{n \times n}$, $b \in \mathbb{R}^{n}$, $B \in \mathbb{R}^{n \times n}$ y $d \in \mathbb{R}^{n}$
+
+\
+
+Los sistemas $Ax = b$ y $Bx = d$ son equivalentes si tienen el mismo conjunto de soluciones. Esto se puede aprovechar transformando la matriz original $A$ a una matriz asociada $B$ con el mismo conjunto de soluciones que sea más fácil de resolver.
+
+\subsection{Sistemas de ecuaciones fáciles} 
+\label{subsec:sistemas_de_ecuaciones_faciles}
+
+\subsubsection{Matriz diagonal}
+\label{subsubsec:matriz_diagonal}
+
+$A = D \in \mathbb{R}^{n \times n}$ matriz diagonal, $b \in \mathbb{R}^{n}$. Es dicha situación se tiene un sistema de la forma
+
+\[
+\begin{matrix}
+a_{11}x_{1} &  &  &  &  & = b_1 \\
+ & \ddots &  & &  & \vdots \\
+ & & a_{ii}x_{i} & & & = b_{i} \\
+ & &  & \ddots & & \vdots \\
+ & & & & a_{nn}x_n & = b_n
+\end{matrix}
+\]
+
+\begin{itemize}
+    \item Si $a_{ii} \neq 0 ~\forall~ i \in \{1,\ldots,n\}$, existe solución y es única. En dicho caso, el algoritmo tiene la forma
+    
+    \
+    
+    \begin{algorithm}
+    \caption{Simple substitution}
+    \label{alg:simple_substitution}
+    \begin{algorithmic}
+    \For{$i \in [1,\ldots,n]$}
+        \State $x_i \gets b_i/a_{ii}$    
+    \EndFor
+    \end{algorithmic}
+    \end{algorithm}
+    
+    El mismo tiene una complejidad que pertenece a $O(n)$.
+    
+    \item Si existe $a_{ii} = 0$
+    \begin{itemize}
+        \item Si $b_{i} = 0$, $x_i$ puede tomar cualquier valor.
+        \item Si $b_{i} \neq 0$. no existe solución.
+    \end{itemize}
+    
+\end{itemize}
+
+\subsubsection{Matriz triangular superior}
+\label{subsubsec:matriz_triangular_superior}
+
+$A = U \in \mathbb{R}^{n \times n}$ matriz triangular superior, $b \in \mathbb{R}^{n}$. Es dicha situación se tiene un sistema de la forma
+
+\[
+\begin{matrix}
+a_{11}x_{1} & \ldots & a_{1i}x_i & \ldots & a_{1n}x_n & = b_1 \\
+ & \ddots & \vdots & \ddots & \vdots & \vdots \\
+ & & a_{ii}x_{i} & \ldots & a_{in}x_n & = b_{i} \\
+ & &  & \ddots & \vdots & \vdots \\
+ & & & & a_{nn}x_n & = b_n
+\end{matrix}
+\]
+
+\begin{itemize}
+    \item Si $a_{ii} \neq 0 ~\forall~ i \in \{1,\ldots,n\}$, existe solución y es única. En dicho caso, el algoritmo tiene la forma
+    
+    \
+    \begin{algorithm}
+    \begin{algorithmic}
+    \caption{Backward substitution}
+    \label{alg:backward_substitution}
+    \State $x_n \gets b_n/a_nn $
+    \For{$i \in [n,\ldots,2]$}
+        \State $x_i \gets (b_i - \sum_{j=i+1}^{n} a_{ij}x_j)/a_{ii}$
+    \EndFor
+    \end{algorithmic}
+    \end{algorithm}
+    
+    El mismo tiene una complejidad que pertenece a $O(n^2)$.
+    
+    \item Si existe $a_{ii} = 0$
+    \begin{itemize}
+        \item Si $b_{i} - \sum_{j=i+1}^{n} a_{ij}x_j = 0$, $x_i$ puede tomar cualquier valor.
+        \item Si $b_{i} - \sum_{j=i+1}^{n} a_{ij}x_j \neq 0$. no existe solución.
+    \end{itemize}
+\end{itemize}
+
+\subsubsection{Matriz triangular inferior}
+\label{subsubsec:matriz_triangular_inferior}
+
+$A = L \in \mathbb{R}^{n \times n}$ matriz triangular superior, $b \in \mathbb{R}^{n}$. Es dicha situación se tiene un sistema de la forma
+
+\[
+\begin{matrix}
+a_{11}x_{1} &  &  &  &   & = b_1 \\
+\vdots &  \ddots & &  &  & \vdots \\
+a_{i1}x_{1} & \ldots & a_{ii}x_{i} & & & = b_{i} \\
+\vdots & \ddots & \vdots & \ddots& & \vdots \\
+a_{n1}x_{1} & \ldots &  a_{ni}x_i & \ldots & a_{nn}x_n & = b_n
+\end{matrix}
+\]
+
+\begin{itemize}
+    \item Si $a_{ii} \neq 0 ~\forall~ i \in \{1,\ldots,n\}$, existe solución y es única. En dicho caso, el algoritmo tiene la forma
+    
+    \
+    \begin{algorithm}
+    \begin{algorithmic}
+    \caption{Forward substitution}
+    \label{alg:forward_substitution}
+    \State $x_1 \gets b_1/a_11 $
+    \For{$i \in [2,\ldots,n]$}
+        \State $x_i \gets (b_i - \sum_{j=1}^{i-1} a_{ij}x_j)/a_{ii}$
+    \EndFor
+    \end{algorithmic}
+    \end{algorithm}
+    
+    El mismo tiene una complejidad que pertenece a $O(n^2)$.
+    
+    \item Si existe $a_{ii} = 0$
+    \begin{itemize}
+        \item Si $b_i - \sum_{j=1}^{i-1} a_{ij}x_j = 0$, $x_i$ puede tomar cualquier valor.
+        \item Si $b_i - \sum_{j=1}^{i-1} a_{ij}x_j \neq 0$. no existe solución.
+    \end{itemize}
+\end{itemize}

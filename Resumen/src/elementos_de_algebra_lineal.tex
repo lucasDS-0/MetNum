@@ -1,0 +1,505 @@
+% elementos_de_algebra_lineal
+\subsection{Definiciones y operaciones básicas}
+\label{subsec:definiciones_y_operaciones_basicas}
+
+\subsubsection{Vector}
+\label{subsubsec:vector}
+
+$v \in \mathbb{R}^{n}$ n-upla de coeficientes reales
+
+\[ v = (v_1,v_2,\ldots,v_n)\]
+
+\begin{itemize}
+    \item[-] Suma: $w = v + u ~\text{con}~ w_i = v_i + u_i ~\text{para}~ i = 1,\ldots,n$ (conmutativa, asociativa)
+    \item[-] Multiplicación por escalar: Sea $\alpha \in \mathbb{R}$, $w = \alpha v$ con $w_i = \alpha v_i$ para $i = 1,\ldots,n$
+    \item[-] Producto interno: $<u,v> = \sum_{i=1}^{n}u_i v_i$
+\end{itemize}
+
+\subsubsection{Combinaciones lineales}
+\label{subsubsec:combinaciones_lineales}
+
+Dados $v^{k} \in \mathbb{R}^n$ para $k = 1,\ldots,K$
+
+\begin{itemize}
+    \item[-] Combinación lineal: $w = \sum_{k_1}^{k}\alpha_k v_{k}$.
+    \item[-] Vectores linealmente independientes: $\sum_{k_1}^{k}\alpha_k v_{k} = 0 \implies \alpha_k = 0 ~\forall k = 1,\ldots,K$.
+    \item[-] Vectores linealmente dependientes: existen $\alpha_k$ con $k = 1,\ldots, K$ no todos nulos tal que $\sum_{k_1}^{k}\alpha_k v_{k} = 0$.
+    \item[-] Subespacio generado: $S = \{x \in \mathbb{R}^{n} ~:~ x = \sum_{k_1}^{k}\alpha_k v_{k}\}$.
+    \item[-] Dimensión de $S$: Cantidad máxima de vectores linealmente independientes en $S$.
+    \item[-] Base de $S$: Conjunto de vectores linealmente independientes que generan a $S$.
+\end{itemize}
+
+\subsection{Matrices}
+\label{subsec:matrices}
+
+Matriz: $A \in \mathbb{R}^{m \times n}$
+
+\[
+A = 
+\begin{bmatrix}
+a_{11} & a_{12} & \ldots & a_{1n} \\
+a_{21} & a_{22} & \ldots & a_{2n} \\
+\vdots & \vdots & \ddots & \vdots \\
+a_{i1} & a_{i2} & \ldots & a_{in} \\
+\vdots & \vdots & \ddots & \vdots \\
+a_{m1} & a_{m2} & \ldots & a_{mn} \\
+\end{bmatrix}
+\]
+
+\noindent $A \in \mathbb{R}^{m \times n}$, $B \in \mathbb{R}^{p \times q}$
+
+\begin{itemize}
+    \item[-] Suma: Definida si $m = p$, $n= q$, $C = A + B$ con $c_{ij} = a_{ij} + b_{ij}$ para $i= 1,\ldots, m$ y $j = 1,\ldots,n$, $C \in \mathbb{R}^{m \times n}$ (conmutativa, asociativa)
+    \item[-] Producto por escalar:
+    $C = \alpha A$ con $c_{ij} \alpha a_{ij}$ para $i= 1,\ldots, m$ y $j = 1,\ldots,n$, $C\in \mathbb{R}^{m \times n}$
+    \item[-] Multiplicación Difinida si $n = m$ (no es conmutativa)
+    \[c_{ij} = \sum_{k = 1}^{n} a_{ik}b_{kj} ~\text{para}~ i= 1,\ldots, m, ~j = 1,\ldots,n ,~ C \in \mathbb{R}^{m \times q}\]
+\end{itemize}
+
+\subsubsection{Matrices útiles}
+\label{subsubsec:matrices_utiles}
+
+\begin{itemize}
+    \item[-] Matriz identidad: $I \in \mathbb{R}^{n\times n}$
+    
+    \[
+    I = 
+    \begin{bmatrix}
+    1 & 0 & \ldots & 0 \\
+    0 & 1 & \ldots & 0 \\
+    \vdots & \vdots & \ddots & \vdots \\
+    0 & 0 & \ldots & 1 \\
+    \end{bmatrix}
+    \]
+    
+    \item[-] Matriz diagonal: $D \in \mathbb{R}^{n \times n}$
+    
+    \[
+    D = 
+    \begin{bmatrix}
+    d_{11} & 0 & \ldots & 0 \\
+    0 & d_{22} & \ldots & 0 \\
+    \vdots & \vdots & \ddots & \vdots \\
+    0 & 0 & \ldots & d_{nn} \\
+    \end{bmatrix}
+    \]
+    
+    \item[-] Matriz triangular superior: $U \in \mathbb{R}^{n \times n}$ con $u_{ij} = 0$ si $i > j$
+    
+    \[
+    U =
+    \begin{bmatrix}
+    * & * & \ldots & * \\
+    0 & * & \ldots & * \\
+    \vdots & \vdots & \ddots & \vdots \\
+    0 & 0 & \ldots & * \\
+    \end{bmatrix}
+    \]
+    
+    \item[-] Matriz triangular inferior: $U \in \mathbb{R}^{n \times n}$ con $u_{ij} = 0$ si $i > j$
+    
+    \[
+    L =
+    \begin{bmatrix}
+    * & 0 & \ldots & 0 \\
+    * & * & \ldots & 0 \\
+    \vdots & \vdots & \ddots & \vdots \\
+    * & * & \ldots & * \\
+    \end{bmatrix}
+    \]
+    
+    \item[-] Producto de triangulares inferiores (superiores) es triangular inferior (superior).
+\end{itemize}
+
+\subsubsection{Definiciones útiles}
+\label{subsubsec:definiciones_utiles_matrices}
+
+$A \in \mathbb{R}^{m \times n}$
+
+\begin{itemize}
+    \item[-] Rango de $A$: Cantidad máxima de columnas (filas) linealmente independientes.
+    \item[-] Matriz inversa: Definida si $m = n$. $A^{-1}, B \in \mathbb{R}^{n \times n}$. Donde $AA^{-1} = A^{-1}A = I$ y 
+     \[A ~\text{inversible} \iff rang(A) = n \iff det(A) \neq 0\]
+    \item[-] La inversa (si existe) de una matriz diagonal es matriz diagonal.
+    \item[-] La inversa (si existe) de una matriz triangular inferior es matriz triangular inferior.
+    \item[-] La inversa (si existe) de una matriz triangular superior es matriz triangular superior.
+    \item[-] Si tanto $A$ como  $B$ son inversibles, entonces $AB$ es inversible y ${(AB)}^{-1} = B^{-1}A^{-1}$
+    \item[-] Matriz estrictamente diagonal dominante:
+    \[|a_{ii}| >  \sum_{j\neq i}|a_{ij}| ~~\forall 1,\ldots,n\]
+    \item[-] Matriz traspuesta $A^{t} \int \mathbb{R}^{n \times m}$
+    \begin{itemize}
+        \item $a_{ij}^{t} = a_{ji}$ para todo $i = 1,\ldots,m$ y $j = 1,\ldots,n$
+        \item ${(A^{t})}^{t} = A$
+        \item ${(A + B)}^{t} = A^{t} + B^{t}$
+        \item ${(AB)}^{t} = B^{t}A^{t}$
+        \item $(A^{t})^{-1} = {(A^{-1})}^{t}$
+    \end{itemize}
+    \item[-] Traza de una matriz (cuadrada): $tr(A) = \sum_{i=1}^{n} a_{ii}$
+    
+    Propiedades:
+    \begin{itemize}
+        \item $tr(A + B) = tr(A) + tr(B)$
+        \item $tr(cA) = ctr(A)$
+        \item $tr(A) = tr(A^t)$
+        \item Si el producto de $A \cdot B$ es posible a ambos lados ($A \in \mathbb{R}^{m \times n}$ y $B \in \mathbb{R}^{n \times m}$), entonces se tiene que $tr(AB) = tr(BA)$
+        \item Si $A,B \in \mathbb{R}^{m \times n}$, entonces
+        \[tr(A^t B) = tr(AB^t) = tr(B^t A) = tr(BA^t) = \sum_{i=1}^{m}\sum_{j=1}^{n} a_{ij}b_{ij}\]
+        \item La traza es invariante en permutaciones cíclicas:
+        \[tr(ABCD) = tr(BCDA) = tr(CDAB) = tr(DABC)\]
+        \item En caso de que se trate de tres matrices simétricas, las permutaciones no cíclicas están permitidas: 
+        \[tr(ABC) = tr({(ABC)}^{t}) = tr(CBA) = tr(ACB)\]
+        \item Sea $A \in \mathbb{C}^{n \times n}$, entonces 
+        \[tr(A) = \sum_{i=1}^{n}\lambda_i\]
+        donde $\lambda_1,\ldots,\lambda_n$ son los autovalores de $A$ (contando multiplicidad).
+    \end{itemize}
+    
+    \item[-] Matriz \emph{nilpotente}: Es una matriz $A$ la cual su determinante es cero, y donde existe un número $k\in \mathbb{N}$ tal que $A^{k} = 0$. Con esto también se tiene que 
+    \begin{itemize}
+        \item $A$ no es inversible.
+        \item $I - A$ es inversible.
+    \end{itemize}
+    \item[-] Matriz de permutación: $P \in \mathbb{R}^{n \times n}$. Son una permutación de las filas (o columnas) de la matriz identidad.
+    \[
+    P = 
+    \begin{bmatrix}
+    0 & 1 & 0 & 0 \\
+    0 & 0 & 0 & 1 \\
+    0 & 0 & 1 & 0 \\
+    1 & 0 & 0 & 0 \\
+    \end{bmatrix}
+    \]
+    
+    \item[-] Multiplicar por matrices de permutación:
+    \[
+    \begin{bmatrix}
+    0 & 1 & 0 & 0 \\
+    0 & 0 & 0 & 1 \\
+    0 & 0 & 1 & 0 \\
+    1 & 0 & 0 & 0 \\
+    \end{bmatrix}
+    \begin{bmatrix}
+    a_{11} & a_{12} & a_{13} & a_{14} \\
+    a_{21} & a_{22} & a_{23} & a_{24} \\
+    a_{31} & a_{32} & a_{33} & a_{34} \\
+    a_{41} & a_{42} & a_{43} & a_{44} \\
+    \end{bmatrix}
+    =
+    \begin{bmatrix}
+    a_{21} & a_{22} & a_{23} & a_{24} \\
+    a_{41} & a_{42} & a_{43} & a_{44} \\
+    a_{31} & a_{32} & a_{33} & a_{34} \\
+    a_{11} & a_{12} & a_{13} & a_{14} \\
+    \end{bmatrix}
+    \]
+    
+    \[
+    \begin{bmatrix}
+    a_{11} & a_{12} & a_{13} & a_{14} \\
+    a_{21} & a_{22} & a_{23} & a_{24} \\
+    a_{31} & a_{32} & a_{33} & a_{34} \\
+    a_{41} & a_{42} & a_{43} & a_{44} \\
+    \end{bmatrix}
+    \begin{bmatrix}
+    0 & 1 & 0 & 0 \\
+    0 & 0 & 0 & 1 \\
+    0 & 0 & 1 & 0 \\
+    1 & 0 & 0 & 0 \\
+    \end{bmatrix}
+    =
+    \begin{bmatrix}
+    a_{14} & a_{111} & a_{13} & a_{12} \\
+    a_{24} & a_{21} & a_{23} & a_{22} \\
+    a_{34} & a_{31} & a_{33} & a_{32} \\
+    a_{44} & a_{41} & a_{43} & a_{42} \\
+    \end{bmatrix}
+    \]
+    
+    \item[-] Matriz elemental (tipo 1): $E \in \mathbb{R}^{n \times n}$. Matriz identidad con una fila multiplicada por un escalar no nulo.
+    \[
+    E = 
+    \begin{bmatrix}
+    1 & 0 & 0 & 0 \\
+    0 & \alpha & 0 & 0 \\
+    0 & 0 & 1 & 0 \\
+    0 & 0 & 0 & 1 \\
+    \end{bmatrix}
+    \]
+    
+    \item[-] Multiplicar por matriz elemental (tipo 1):
+    \[
+    \begin{bmatrix}
+    1 & 0 & 0 & 0 \\
+    0 & \alpha & 0 & 0 \\
+    0 & 0 & 1 & 0 \\
+    0 & 0 & 0 & 1 \\
+    \end{bmatrix}
+    \begin{bmatrix}
+    a_{11} & a_{12} & a_{13} & a_{14} \\
+    a_{21} & a_{22} & a_{23} & a_{24} \\
+    a_{31} & a_{32} & a_{33} & a_{34} \\
+    a_{41} & a_{42} & a_{43} & a_{44} \\
+    \end{bmatrix}
+    =
+    \begin{bmatrix}
+    a_{11} & a_{12} & a_{13} & a_{14} \\
+    \alpha a_{21} & \alpha a_{22} & \alpha a_{23} & \alpha a_{24} \\
+    a_{31} & a_{32} & a_{33} & a_{34} \\
+    a_{41} & a_{42} & a_{43} & a_{44} \\
+    \end{bmatrix}
+    \]
+    
+    \[
+    \begin{bmatrix}
+    a_{11} & a_{12} & a_{13} & a_{14} \\
+    a_{21} & a_{22} & a_{23} & a_{24} \\
+    a_{31} & a_{32} & a_{33} & a_{34} \\
+    a_{41} & a_{42} & a_{43} & a_{44} \\
+    \end{bmatrix}
+    \begin{bmatrix}
+    1 & 0 & 0 & 0 \\
+    0 & \alpha & 0 & 0 \\
+    0 & 0 & 1 & 0 \\
+    0 & 0 & 0 & 1 \\
+    \end{bmatrix}
+    =
+    \begin{bmatrix}
+    a_{11} & \alpha a_{12} & a_{13} & a_{14} \\
+    a_{21} & \alpha a_{22} & a_{23} & a_{24} \\
+    a_{31} & \alpha a_{32} & a_{33} & a_{34} \\
+    a_{41} & \alpha a_{42} & a_{43} & a_{44} \\
+    \end{bmatrix}
+    \]
+        
+    \item[-] Matriz elemental (tipo 2): $E \in \mathbb{R}^{n \times n}$. Matriz identidad con un elemento no nulo fuera de la diagonal.
+    \[
+    E = 
+    \begin{bmatrix}
+    1 & 0 & 0 & 0 \\
+    0 & 1 & 0 & 0 \\
+    \alpha & 0 & 1 & 0 \\
+    0 & 0 & 0 & 1 \\
+    \end{bmatrix}
+    \]
+    
+    \item[-] Multiplicar por matriz elemental (tipo 1):
+    \[
+    \begin{bmatrix}
+    1 & 0 & 0 & 0 \\
+    0 & 1 & 0 & 0 \\
+    \alpha & 0 & 1 & 0 \\
+    0 & 0 & 0 & 1 \\
+    \end{bmatrix}
+    \begin{bmatrix}
+    a_{11} & a_{12} & a_{13} & a_{14} \\
+    a_{21} & a_{22} & a_{23} & a_{24} \\
+    a_{31} & a_{32} & a_{33} & a_{34} \\
+    a_{41} & a_{42} & a_{43} & a_{44} \\
+    \end{bmatrix}
+    =
+    \begin{bmatrix}
+    a_{11} & a_{12} & a_{13} & a_{14} \\
+    a_{21} & a_{22} & a_{23} & a_{24} \\
+    \alpha a_{11} + a_{31} & \alpha a_{12} + a_{32} & \alpha a_{13} + a_{33} & \alpha a_{14} + a_{34} \\
+    a_{41} & a_{42} & a_{43} & a_{44} \\
+    \end{bmatrix}
+    \]
+    
+    \[
+    \begin{bmatrix}
+    a_{11} & a_{12} & a_{13} & a_{14} \\
+    a_{21} & a_{22} & a_{23} & a_{24} \\
+    a_{31} & a_{32} & a_{33} & a_{34} \\
+    a_{41} & a_{42} & a_{43} & a_{44} \\
+    \end{bmatrix}
+    \begin{bmatrix}
+    1 & 0 & 0 & 0 \\
+    0 & 1 & 0 & 0 \\
+    \alpha & 0 & 1 & 0 \\
+    0 & 0 & 0 & 1 \\
+    \end{bmatrix}
+    =
+    \begin{bmatrix}
+    a_{11} + \alpha a_{13} & a_{12} & a_{13} & a_{14} \\
+    a_{21} + \alpha a_{23} & a_{22} & a_{23} & a_{24} \\
+    a_{31} + \alpha a_{33} & a_{32} & a_{33} & a_{34} \\
+    a_{41} + \alpha a_{43} & a_{42} & a_{43} & a_{44} \\
+    \end{bmatrix}
+    \]
+    
+    \item[-] Espacio imagen: $A \in \mathbb{R}^{m \times n}$ 
+    
+    \[Im(A) = \{y \in \mathbb{R}^{m} ~:~ \exists x\in \mathbb{R}^{n} ~\text{con}~ Ax = y\}\]
+    
+    Combinaciones lineales de las columnas de $A$.
+    
+    \[
+    \begin{bmatrix}
+    a_{11} \\
+    a_{21} \\
+    \vdots \\
+    a_{m1} \\
+    \end{bmatrix}
+    x_1 +
+    \begin{bmatrix}
+    a_{12} \\
+    a_{22} \\
+    \vdots \\
+    a_{m2} \\
+    \end{bmatrix}
+    x_2 + \ldots
+    \begin{bmatrix}
+    a_{1i} \\
+    a_{2i} \\
+    \vdots \\
+    a_{mi} \\
+    \end{bmatrix}
+    x_i + \ldots
+    \begin{bmatrix}
+    a_{1n} \\
+    a_{2n} \\
+    \vdots \\
+    a_{mn} \\
+    \end{bmatrix}
+    x_n
+    \]
+    
+    \item[-] Espacio Nulo: $Nu(A) = \{x \in \mathbb{R}^{n} ~:~ Ax = 0\}$
+    \[Nu(A) \neq \emptyset \iff ~\text{las columnas de $A$ son linealmente independientes}\]    
+\end{itemize}
+
+\subsection{Transformaciones lineales}
+·\label{subsec:transformaciones_lineales}
+
+$f ~:~ \mathbb{V} \to \mathbb{W}$  se dice una transformación lineal si cumple:
+
+\begin{itemize}
+    \item $f(v + w) = f(v) + f(w)$
+    \item $f(\lambda v) = \lambda \cdot f(v)$
+\end{itemize}
+
+\subsubsection{Matriz asociada}
+\label{subsubsec:matriz_asociada}
+
+\begin{itemize}
+    \item $A\cdot e_i =$ "columna $i$ de $A$", donde $e_1 = 
+    \begin{bmatrix}
+    1 \\
+    0 \\
+    \vdots \\
+    0
+    \end{bmatrix},~ e_2 = 
+    \begin{bmatrix}
+    0 \\
+    1 \\
+    \vdots \\
+    0
+    \end{bmatrix}$.
+    \item $e_{j}^{t}\cdot A =$ "fila $j$ de $A$".
+\end{itemize}
+
+\noindent Toda transformación lineal $f$ tiene su matriz asociada $A \in \mathbb{R}^{n \times n}$, donde se dice que la matriz de la transformación $f$ es $A$.
+
+\[
+A = M(f) = 
+\begin{bmatrix}
+\vdots & \vdots &  & \vdots \\
+f(e_1) & f(e_2) & \ldots & f(e_m) \\
+\vdots & \vdots &  & \vdots \\
+\end{bmatrix}
+\]
+
+donde $f(e_i)$ tiene $n$ elementos.
+
+\noindent Propiedades:
+
+\begin{itemize}
+    \item $f(x) = M(f)\cdot x$
+    \item $M(f)\cdot M(g) = M(f \circ g)$
+    \item $M(id) = I$
+    \item $f$ es inversible $iff$ $M(f)$ es inversible
+\end{itemize}
+
+\subsubsection{Núcleo e Imagen de una transformación lineal}
+\label{subsubsec:nucleo_e_imagen_de_tl}
+
+\
+
+Núcleo de $A$
+
+\[Nu(A) = \{x \in \mathbb{R}^{n} ~:~ Ax = 0\}\]
+
+
+Imagen de $A$
+
+\[Im(A) = \{y ~:~ x \in \mathbb{R}^{n} \land Ax = y\}\]
+
+Cómo hallar la imagen de $A$:
+
+\
+
+Utilizando $x = (x_1, x_2, \ldots, x_n)$ con $x_1,x_2,\ldots x_n \in \mathbb{R}$, calculo 
+
+\
+
+$Ax = A\begin{bmatrix}
+x_1 \\
+x_2 \\
+\vdots \\
+x_n
+\end{bmatrix} = A(x_1 e_1 + \ldots x_n e_n) =
+x_1\cdot A\cdot e_1 + x_2\cdot A\cdot e_2 + \ldots x_n\cdot A\cdot e_n$
+
+\
+
+Luego, si todas las columnas son l.i., 
+
+\[Im(A) = <col_1(A), col_2(A),\ldots, col_n(A)> = \{x_1\cdot col_1(A) + \ldots + x_n \cdot col_n(A)\}\]
+
+o en su defecto, sacando la cantidad de columnas no l.i. necesarias.
+
+\subsection{Dimensión}
+\label{subsec:dimension_matriz}
+
+Teorema de la dimensión: Se tiene $A \in \mathbb{R}^{n \times m}$
+
+\[m = dim(Nu(A)) + dim(Im(A))\]
+
+donde se entiende a $dim(Im(A)) = rang_c(A)$ como "número de columnas l.i. d $A$".
+
+\newpage
+
+\subsection{Enunciados de la guía práctica}
+\label{subsec:enunciados_guia_1}
+
+\subsubsection{Ejercicio 19}
+\label{subsubsec:guia_1_ej_19}
+
+Sean $A,B \in \mathbb{R}^{n \times n}$, entonces:
+\begin{itemize}
+    \item $Nu(B) \subseteq Nu(AB)$
+    \item $Im(AB) \subseteq Im(A)$
+    \item Si $AB = 0$ entonces $Im(B) \subseteq Nu(A)$
+\end{itemize}
+
+\subsubsection{Ejercicio 21}
+\label{subsubsec:guia_1_ej_21}
+
+Sea $A \in \mathbb{R}^{n \times n}$, todas las siguientes condiciones son equivalentes:
+\begin{itemize}
+    \item $A$ es inversible.
+    \item $\nexists x \in \mathbb{R}^{n} \land x\neq 0$ tal que $Ax = 0$.
+    \item Las columnas de $A$ son linealmente independientes.
+    \item Las filas de $A$ son linealmente independientes.
+\end{itemize}
+
+\subsubsection{Ejercicio 22}
+\label{subsubsec:guia_1_ej_22}
+
+Sean $A \in \mathbb{R}^{n \times n}$ inversible y $B, C \in \mathbb{R}^{n \times m}$, se tiene que:
+
+\begin{itemize}
+    \item $AB = AC \implies B = C$
+    \item $AB = 0 \implies B = 0$
+    \item Si $m = n$ y si $\forall D \in \mathbb{R}^{m \times m}$ tal que $tr(BD) = tr(CD)$, entonces $B = C$
+    \item Si $m = n$ entonces $tr(B) = tr(ABA^{-1})$
+\end{itemize}

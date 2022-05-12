@@ -1,0 +1,104 @@
+\documentclass[a4paper]{article}
+\usepackage[T1]{fontenc}
+\usepackage{courier}
+\usepackage[utf8]{inputenc}
+\usepackage{algorithmicx, algpseudocode, algorithm}
+\usepackage{tikz}
+\usepackage[colorlinks = true]{hyperref}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{multicol}
+\usepackage{amssymb}
+\usepackage[paper=a4paper, left=1.5cm, right=1.5cm, bottom=2cm, top=2cm]{geometry}
+
+\renewcommand*\contentsname{Contenidos}
+
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\renewcommand{\sectionmark}[1]{\markright{\thesection\ - #1}}
+\fancyhf{}
+\fancyhead[LO]{Sección \rightmark}
+\fancyfoot[RO]{\thepage}
+\renewcommand{\headrulewidth}{0.5pt}
+\renewcommand{\footrulewidth}{0.5pt}
+\renewcommand{\baselinestretch}{1.1}
+
+\setlength{\headheight}{12.5pt}
+
+\title{Apunte de Métodos Numéricos}
+\author{Lucas Di Salvo}
+\date{2022/05/11}
+
+\begin{document}
+
+\maketitle
+
+\thispagestyle{empty}
+\vspace{1cm}
+{
+\hypersetup{linkcolor = black}
+\tableofcontents
+}
+\newpage
+
+\thispagestyle{empty}
+\vspace{1cm}
+\addcontentsline{lot}{section}{List of algorithms}
+\renewcommand*\listalgorithmname{Lista de Algoritmos}
+{
+\hypersetup{linkcolor = black}
+\listofalgorithms
+}
+\newpage
+
+\section{Elementos de Álgebra Lineal}
+\label{section:elementos_de_algebra_lineal}
+\input{src/elementos_de_algebra_lineal}
+\newpage
+
+\section{Sistemas lineales}
+\label{section:sistemas_lineales}
+\input{src/sistemas_lineales}
+\newpage
+
+\section{Eliminación Gaussiana}
+\label{section:eliminacion_gaussiana}
+\input{src/eliminacion_gaussiana}
+\newpage
+
+\section{Factorización LU}
+\label{section:factorizacion_lu}
+\input{src/factorizacion_lu}
+\newpage
+
+\section{Normas}
+\label{section:normas}
+\input{src/normas}
+\newpage
+
+\section{Número de condición}
+\label{section:numero_de_condicion}
+\input{src/numero_de_condicion}
+\newpage
+
+\section{Matrices Simétricas Definidas Positivas}
+\label{section:matrices_sdp}
+\input{src/matrices_sdp}
+\newpage
+
+\section{Factorización de Cholesky}
+\label{section:factorizacion_de_cholesky}
+\input{src/factorizacion_de_cholesky}
+\newpage
+
+\section{Matrices ortogonales}
+\label{section:matrices_ortogonales}
+\input{src/matrices_ortogonales}
+\newpage
+
+\section{Factorización QR}
+\label{section:factorizacon_qr}
+\input{src/factorizacion_qr}
+\newpage
+
+\end{document}
