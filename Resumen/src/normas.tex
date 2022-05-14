@@ -1,13 +1,101 @@
 % normas
 \subsection{Normas vectoriales}\label{subsec:normas_vectoriales}
 
+$f~:~\mathbb{R}^{n}\to\mathbb{R}$ es una norma si:
+
+\begin{itemize}
+    \item $f(x) > 0$ si $x \neq 0$
+    \item $f(x) = 0 \iff x \neq 0$ 
+    \item $f(\alpha x) = |\alpha|f(x)$ para todo $\alpha \in \mathbb{R}$
+    \item $f(x + y) \leq f(x) + f(y)$
+\end{itemize}
+
+\subsubsection{Ejemplos}\label{subsubsec:normas_vectoriales_ejemplos}
+
+\begin{itemize}
+    \item ${||x||}_{2} = \sqrt{\sum_{i = 1}^{n}x_{i}^{2}}$
+    \item ${||x||}_{1} = \sum_{i = 1}^{n}|x_{i}|$
+    \item ${||x||}_{p} = {(\sum_{i = 1}^{n}{|x_{i}|}^{p})}^{\frac{1}{p}}$
+    \item ${||x||}_{\infty} = \max_{i=1\ldots n} |x_i|$
+\end{itemize}
+
 \subsection{Normas matriciales}\label{subsec:normas_matriciales}
+
+$F~:~\mathbb{R}^{m \times n}\to\mathbb{R}$ es una norma si:
+
+\begin{itemize}
+    \item $F(A) > 0$ si $A \neq 0$
+    \item $F(A) = 0 \iff A \neq 0$ 
+    \item $F(\alpha x) = |\alpha|F(A)$ para todo $\alpha \in \mathbb{R}$
+    \item $F(A + B) \leq F(A) + F(B)$
+    \item $F(AB) \leq F(A)F(B)$ (propiedad adicional, son normas sub-multiplicativas, $m = n$)
+\end{itemize}
+
+\subsubsection{Ejemplos}\label{subsubsec:normas_matriciales_ejemplos}
+
+\begin{itemize}
+    \item Norma de Frobenius ${||A||}_{F} = \sqrt{(\sum_{i=1}^{m}\sum_{j=1}^{n}a_{ij}^{2})}$
+\end{itemize}
 
 \subsection{Normas matriciales inducidas}\label{subsec:normas_matriciales_inducidas}
 
+Sean $f_1$ una norma definida en $\mathbb{R}^{m}$ y $f_2$ una norma definida en $\mathbb{R}^{n}$
+
+$F:\mathbb{R}^{m\times n}\to\mathbb{R}$ es una norma inducida si:
+
+\[F(A) = \max_{x\neq 0}\frac{f_1 (Ax)}{f_2 (x)}\]
+
+\[F(A) = \max_{x:f_2 (x) = 1} f_1 (Ax)\]
+
+\noindent Las normas inducidas por una norma vectorial verifican $||Ax|| \leq ||A||\cdot||x||$
+
+\subsubsection{Ejemplos con matriz cuadrada}\label{subsubsec:normas_matriciales_inducidas_ejemplos}
+
+Ejemplo para $n=m$
+
+\begin{itemize}
+    \item ${||A||}_1 = \underset{x:{||x||}_1 = 1}{\max} {||Ax||}_1 = \underset{j=1,\ldots,n}{\max}\sum_{i=1}^{n}|a_{ij}|$
+    \item ${||A||}_2 = \underset{x:{||x||}_2 = 1}{\max} {||Ax||}_2 = \sqrt{\max |\lambda|~:~\lambda~\text{autovalor de}~A^{t}A}$
+    \item ${||A||}_p = \underset{x:{||x||}_p = 1}{\max} {||Ax||}_p$
+    \item ${||A||}_{\infty} = \underset{x:{||x||}_{\infty} = 1}{\max} {||Ax||}_{\infty} = \underset{i=1,\ldots,n}{\max}\sum_{j=1}^{n}|a_{ij}|$
+\end{itemize}
+
 \subsection{Número de condición}\label{subsec:numero_de_condicion}
+
+Sea $A \in \mathbb{R}^{n \times n}$ matriz no singular y $||\cdot||$ una norma matricial. 
+Se define el número de condición de $A$ como
+
+\[\kappa(A) = ||A||\cdot||A^{-1}||\]
+
+\begin{itemize}
+    \item Si $||\cdot||$ es una norma inducida, $\kappa(I) = 1$
+    \item Si $||\cdot||$ es una norma sub-multiplicativa, $\kappa(A) \geq 1$, pues
+    \[1 = \underset{x~:~||x||=1}{\max}||x|| = ||I|| = ||AA^{-1}|| \leq ||A||\cdot||A^{-1}||\]
+\end{itemize}
 
 \subsection{Cota del error}\label{subsec:cota_de_error}
 
+Sea $A \in \mathbb{R}^{n \times n}$ matriz no singular y $||\cdot||$ una norma matricial inducida. 
+Sea $\tilde x$ solución aproximada del sistema $Ax = b$ con $b \neq 0$ y $r = Ax - A\tilde x = b - \tilde b$
 
+\[\frac{||x - \tilde x||}{||x||} \leq ||A||\cdot||A^{-1}||\frac{||b - \tilde b||}{||b||}\]
 
+(pequeñas diferencias en $b$ no garantizan pequeños cambios en el vector solución $x$)
+
+\subsubsection{Residuo}
+
+Sea el residuo $r = b - A\tilde x$, para probar que
+
+\[||x- \tilde x|| \leq ||r||\cdot||A^{-1}||\]
+
+tengo que 
+
+\[r = b - A\tilde x = Ax - A\tilde x = A(x-\tilde x)\]
+\[r = A(x-\tilde x)\]
+\[A^{-1}r = x - \tilde x\]
+
+y cambiando los lados y aplicando la norma a ambos lados
+
+\[||x - \tilde x|| = ||A^{-1}r|| \leq ||A^{-1}||\cdot||r||\]
+
+\[\]
