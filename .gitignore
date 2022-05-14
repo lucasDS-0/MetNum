@@ -36,7 +36,7 @@
 *.fdb_latexmk
 *.fls
 *.log
-#*.pdf
+*.pdf
 *.gz
 *.loa
 *.toc
