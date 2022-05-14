@@ -1,1 +1,21 @@
 % matrices_sdp
+
+Sea $A \in \mathbb{R}^{n \times n}$, $A$ se dice símetrica definida positiva (sdp) si y sólo si
+
+\begin{itemize}
+    \item $A = A^t$, simétrica.
+    \item $x^{t}Ax > 0$ para todo $x \in \mathbb{R}^{n},~ x \neq 0$, definida positiva.
+\end{itemize}
+
+\subsection{Propiedades}\label{matrices_sdp_propiedades}
+
+\begin{itemize}
+    \item $A$ es no singular.
+    \item $a_{ii} > 0$ para todo $i = 1,\ldots,n$.
+    \item Toda submatriz principal es sdp (por lo tanto no singular).
+    \item Existe factorización $LU$.
+    \item $A$ sdp $\iff$ $B^{t}AB$ es sdp con $B$ no singular.
+    \item La submatriz conformada por las filas $2$ a $n$ y columnas $2$ a $n$ después del primer paso de
+    la eliminación gaussiana es sdp.
+    \item Se puede realizar el método de eliminación gaussiana sin necesidad de permutar filas.
+\end{itemize}
