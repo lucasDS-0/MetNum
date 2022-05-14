@@ -1,9 +1,7 @@
 % elementos_de_algebra_lineal
-\subsection{Definiciones y operaciones básicas}
-\label{subsec:definiciones_y_operaciones_basicas}
+\subsection{Definiciones y operaciones básicas}\label{subsec:definiciones_y_operaciones_basicas}
 
-\subsubsection{Vector}
-\label{subsubsec:vector}
+\subsubsection{Vector}\label{subsubsec:vector}
 
 $v \in \mathbb{R}^{n}$ n-upla de coeficientes reales
 
@@ -15,8 +13,7 @@ $v \in \mathbb{R}^{n}$ n-upla de coeficientes reales
     \item[-] Producto interno: $<u,v> = \sum_{i=1}^{n}u_i v_i$
 \end{itemize}
 
-\subsubsection{Combinaciones lineales}
-\label{subsubsec:combinaciones_lineales}
+\subsubsection{Combinaciones lineales}\label{subsubsec:combinaciones_lineales}
 
 Dados $v^{k} \in \mathbb{R}^n$ para $k = 1,\ldots,K$
 
@@ -25,12 +22,11 @@ Dados $v^{k} \in \mathbb{R}^n$ para $k = 1,\ldots,K$
     \item[-] Vectores linealmente independientes: $\sum_{k_1}^{k}\alpha_k v_{k} = 0 \implies \alpha_k = 0 ~\forall k = 1,\ldots,K$.
     \item[-] Vectores linealmente dependientes: existen $\alpha_k$ con $k = 1,\ldots, K$ no todos nulos tal que $\sum_{k_1}^{k}\alpha_k v_{k} = 0$.
     \item[-] Subespacio generado: $S = \{x \in \mathbb{R}^{n} ~:~ x = \sum_{k_1}^{k}\alpha_k v_{k}\}$.
-    \item[-] Dimensión de $S$: Cantidad máxima de vectores linealmente independientes en $S$.
+    \item[-] dimensión de $S$: Cantidad máxima de vectores linealmente independientes en $S$.
     \item[-] Base de $S$: Conjunto de vectores linealmente independientes que generan a $S$.
 \end{itemize}
 
-\subsection{Matrices}
-\label{subsec:matrices}
+\subsection{Matrices}\label{subsec:matrices}
 
 Matriz: $A \in \mathbb{R}^{m \times n}$
 
@@ -56,8 +52,7 @@ a_{m1} & a_{m2} & \ldots & a_{mn} \\
     \[c_{ij} = \sum_{k = 1}^{n} a_{ik}b_{kj} ~\text{para}~ i= 1,\ldots, m, ~j = 1,\ldots,n ,~ C \in \mathbb{R}^{m \times q}\]
 \end{itemize}
 
-\subsubsection{Matrices útiles}
-\label{subsubsec:matrices_utiles}
+\subsubsection{Matrices útiles}\label{subsubsec:matrices_utiles}
 
 \begin{itemize}
     \item[-] Matriz identidad: $I \in \mathbb{R}^{n\times n}$
@@ -111,8 +106,7 @@ a_{m1} & a_{m2} & \ldots & a_{mn} \\
     \item[-] Producto de triangulares inferiores (superiores) es triangular inferior (superior).
 \end{itemize}
 
-\subsubsection{Definiciones útiles}
-\label{subsubsec:definiciones_utiles_matrices}
+\subsubsection{Definiciones útiles}\label{subsubsec:definiciones_utiles_matrices}
 
 $A \in \mathbb{R}^{m \times n}$
 
@@ -132,7 +126,7 @@ $A \in \mathbb{R}^{m \times n}$
         \item ${(A^{t})}^{t} = A$
         \item ${(A + B)}^{t} = A^{t} + B^{t}$
         \item ${(AB)}^{t} = B^{t}A^{t}$
-        \item $(A^{t})^{-1} = {(A^{-1})}^{t}$
+        \item ${(A^{t})}^{-1} = {(A^{-1})}^{t}$
     \end{itemize}
     \item[-] Traza de una matriz (cuadrada): $tr(A) = \sum_{i=1}^{n} a_{ii}$
     
@@ -367,8 +361,7 @@ $A \in \mathbb{R}^{m \times n}$
     \[Nu(A) \neq \emptyset \iff ~\text{las columnas de $A$ son linealmente independientes}\]    
 \end{itemize}
 
-\subsection{Transformaciones lineales}
-·\label{subsec:transformaciones_lineales}
+\subsection{Transformaciones lineales}\label{subsec:transformaciones_lineales}
 
 $f ~:~ \mathbb{V} \to \mathbb{W}$  se dice una transformación lineal si cumple:
 
@@ -377,8 +370,7 @@ $f ~:~ \mathbb{V} \to \mathbb{W}$  se dice una transformación lineal si cumple:
     \item $f(\lambda v) = \lambda \cdot f(v)$
 \end{itemize}
 
-\subsubsection{Matriz asociada}
-\label{subsubsec:matriz_asociada}
+\subsubsection{Matriz asociada}\label{subsubsec:matriz_asociada}
 
 \begin{itemize}
     \item $A\cdot e_i =$ "columna $i$ de $A$", donde $e_1 = 
@@ -419,15 +411,13 @@ donde $f(e_i)$ tiene $n$ elementos.
     \item $f$ es inversible $iff$ $M(f)$ es inversible
 \end{itemize}
 
-\subsubsection{Núcleo e Imagen de una transformación lineal}
-\label{subsubsec:nucleo_e_imagen_de_tl}
+\subsubsection{Núcleo e Imagen de una transformación lineal}\label{subsubsec:nucleo_e_imagen_de_tl}
 
 \
 
 Núcleo de $A$
 
 \[Nu(A) = \{x \in \mathbb{R}^{n} ~:~ Ax = 0\}\]
-
 
 Imagen de $A$
 
@@ -453,26 +443,23 @@ x_1\cdot A\cdot e_1 + x_2\cdot A\cdot e_2 + \ldots x_n\cdot A\cdot e_n$
 
 Luego, si todas las columnas son l.i., 
 
-\[Im(A) = <col_1(A), col_2(A),\ldots, col_n(A)> = \{x_1\cdot col_1(A) + \ldots + x_n \cdot col_n(A)\}\]
+\[Im(A) = <col_1(A), col_2(A),\ldots, col_n(A)> = \{x_1\cdot col_1(A) + \cdots + x_n \cdot col_n(A)\}\]
 
 o en su defecto, sacando la cantidad de columnas no l.i. necesarias.
 
-\subsection{Dimensión}
-\label{subsec:dimension_matriz}
+\subsection{dimensión}\label{subsec:dimension_matriz}
 
 Teorema de la dimensión: Se tiene $A \in \mathbb{R}^{n \times m}$
 
 \[m = dim(Nu(A)) + dim(Im(A))\]
 
-donde se entiende a $dim(Im(A)) = rang_c(A)$ como "número de columnas l.i. d $A$".
+donde se entiende a $dim(Im(A)) = rang_c(A)$ como "número de columnas l.i. de $A$".
 
 \newpage
 
-\subsection{Enunciados de la guía práctica}
-\label{subsec:enunciados_guia_1}
+\subsection{Enunciados de la guía práctica}\label{subsec:enunciados_guia_1}
 
-\subsubsection{Ejercicio 19}
-\label{subsubsec:guia_1_ej_19}
+\subsubsection{Ejercicio 19}\label{subsubsec:guia_1_ej_19}
 
 Sean $A,B \in \mathbb{R}^{n \times n}$, entonces:
 \begin{itemize}
@@ -481,8 +468,7 @@ Sean $A,B \in \mathbb{R}^{n \times n}$, entonces:
     \item Si $AB = 0$ entonces $Im(B) \subseteq Nu(A)$
 \end{itemize}
 
-\subsubsection{Ejercicio 21}
-\label{subsubsec:guia_1_ej_21}
+\subsubsection{Ejercicio 21}\label{subsubsec:guia_1_ej_21}
 
 Sea $A \in \mathbb{R}^{n \times n}$, todas las siguientes condiciones son equivalentes:
 \begin{itemize}
@@ -492,8 +478,7 @@ Sea $A \in \mathbb{R}^{n \times n}$, todas las siguientes condiciones son equiva
     \item Las filas de $A$ son linealmente independientes.
 \end{itemize}
 
-\subsubsection{Ejercicio 22}
-\label{subsubsec:guia_1_ej_22}
+\subsubsection{Ejercicio 22}\label{subsubsec:guia_1_ej_22}
 
 Sean $A \in \mathbb{R}^{n \times n}$ inversible y $B, C \in \mathbb{R}^{n \times m}$, se tiene que:
 

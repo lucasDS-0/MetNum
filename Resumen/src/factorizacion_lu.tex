@@ -6,8 +6,7 @@ Sean $A \in \mathbb{R}^{n \times n}$, $L \in \mathbb{R}^{n \times n}$ triangular
 
 \[A = LU\]
 
-\subsection{Utilidad}
-\label{subsec:utilidad_lu}
+\subsection{Utilidad}\label{subsec:utilidad_lu}
 
 Se tiene que $Ax = b$, luego
 
@@ -20,8 +19,7 @@ y se resuelve en dos etapas:
 
 los cuales son dos sistemas triangulares con un costo de computo que pertenece a $O(n^2)$.
 
-\subsection{Matriz de transformación gaussiana}
-\label{subsec:matriz_de_transformacion_gaussiana}
+\subsection{Matriz de transformación gaussiana}\label{subsec:matriz_de_transformacion_gaussiana}
 
 Sea $A \in \mathbb{R}^{n \times n}$. Supongamos que aplicamos eliminación Gaussiana y se verifica que $a_{ii}^{i - 1}  \neq 0$ para todo $i = 1,\ldots,n-1$.
 
@@ -170,8 +168,7 @@ a_{11}^{i-1} & a_{12}^{i-1} & \ldots & a_{1i}^{i-1} & \ldots & a_{1n}^{i-1} \\
 \end{bmatrix}
 \]
 
-\subsection{Método de Eliminación Gaussiana}
-\label{subsec:metodo_de_eliminacion_gaussiana}
+\subsection{Método de Eliminación Gaussiana}\label{subsec:metodo_de_eliminacion_gaussiana}
 
 Con lo visto en la sección previa, se puede observar que el producto de las distintas $M^i$ con A, realizan el algoritmo de Eliminación Gaussiana visto en la sección \ref{subsec:algotimo_de_eliminacion_gaussiana}, obteniéndose una matriz triangular superior
 
@@ -183,7 +180,7 @@ M^{n-1}M^{n-2}\cdots M^{1}A = U ~\text{con $U$ triangular superior}
 
 Un dato \emph{importante} de todo esto es que se asume que $a_{ii}^{i-1} \neq 0$ para todo $i = 1,\ldots,n$.
 
-\subsection{Propiedades de la matriz de transformación gaussiana}
+\subsection{Propiedades de la matriz de transformación gaussiana}\label{subsec:propiedades_matriz_transformacion_gaussiana}
 
 Tengo que puedo ver a $M^i$ como
 
@@ -286,8 +283,7 @@ u_{11} & u_{12} & \ldots & u_{1i} & \ldots & u_{1n} \\
 \end{bmatrix}
 \]
 
-\subsection{Propiedades de LU}
-\label{subsec:propiedades_de_lu}
+\subsection{Propiedades de LU}\label{subsec:propiedades_de_lu}
 
 \begin{itemize}
     \item La factorización LU está asociada a la Eliminación Gaussiana sin necesidad de intercambio de filas. Se verifica que $l_{ii} = 1$ para todo $i = 1,\ldots,n$.
@@ -425,8 +421,7 @@ u_{11} & u_{12} & \ldots & u_{1i} & \ldots & u_{1n} \\
     \item Si $A$ es estrictamente diagonal dominante, su factorización LU es única.
 \end{itemize}
 
-\subsection{Factorización PLU}
-\label{subsec:factorizacion_plu}
+\subsection{Factorización PLU}\label{subsec:factorizacion_plu}
 
 En el caso de que exista $i = 1,\ldots,n$ para el cual $a_{ii}^{i-1} = 0$, se puede continuar la Eliminación Gaussiana mediante permutación de filas y obtener una factorización LU de la matriz original permutada, de la forma 
 
@@ -434,11 +429,9 @@ En el caso de que exista $i = 1,\ldots,n$ para el cual $a_{ii}^{i-1} = 0$, se pu
 
 siendo $P$ la matriz de permutación que establece como se intercambiaron las filas.
 
-\subsection{Enunciados de la guía práctica}
-\label{subsec:enunciados_guia_2}
+\subsection{Enunciados de la guía práctica}\label{subsec:enunciados_guia_2}
 
-\subsubsection{Ejercicio 5}
-\label{subsubsec:guia_2_ej_5}
+\subsubsection{Ejercicio 5}\label{subsubsec:guia_2_ej_5}
 
 Sean $A_1,\ldots,A_k \in \mathbb{R}^{n \times n}$ tales que $A_h = L_h U$ es una factorización $LU$ de $A_h~\forall h$ ($U$ es la misma para todas). Sea $A = \sum_{h=1}^{k}A_h$, probar:
 \begin{itemize}
@@ -481,8 +474,7 @@ Sean $A_1,\ldots,A_k \in \mathbb{R}^{n \times n}$ tales que $A_h = L_h U$ es una
     donde cada $m_{ij} = \frac{\sum_{h=1}^{k}m_{ij}^{h}}{k}$
 \end{itemize}
 
-\subsubsection{Ejercicio 9}
-\label{subsubsec:guia_2_ej_9}
+\subsubsection{Ejercicio 9}\label{subsubsec:guia_2_ej_9}
 
 Sea $A \in \mathbb{R}^{n \times n}$ inversible, $A = TS$, con $T$ triangular inferior y $S$ triangular superior. Probar:
 

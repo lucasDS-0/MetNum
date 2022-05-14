@@ -1,7 +1,6 @@
 % eliminacion_gaussiana
 
-\subsection{Sistemas de ecuaciones generales}
-\label{subsec:sistemas_de_ecuaciones_generales}
+\subsection{Sistemas de ecuaciones generales}\label{subsec:sistemas_de_ecuaciones_generales}
 
 Cuando el sistema de ecuaciones no es de las formas presentadas en la sección \ref{subsec:sistemas_de_ecuaciones_faciles}, se puede construir un sistema equivalente al que se quiere resolver cuya matriz asociada sea más fácil de resolver.
 
@@ -9,8 +8,7 @@ Cuando el sistema de ecuaciones no es de las formas presentadas en la sección \
 
 Esto se logra sumando y restando ecuaciones, multiplicando ecuaciones por un escalar, y permutando ecuaciones. En particular, el método por defecto que se utiliza para ello es conocido como \emph{Eliminación Gaussiana}.
 
-\subsection{Algoritmo de Eliminación Gaussiana}
-\label{subsec:algotimo_de_eliminacion_gaussiana}
+\subsection{Algoritmo de Eliminación Gaussiana}\label{subsec:algotimo_de_eliminacion_gaussiana}
 
 Sean $A \in \mathbb{R}^{n \times n}$, y $b \in \mathbb{R}^n$.
 
@@ -92,15 +90,14 @@ Sean $A \in \mathbb{R}^{n \times n}$, y $b \in \mathbb{R}^n$.
 
 \newpage
 
-\subsubsection{Esquema básico}
-\label{subsubsec:eg_esquema_basico}
+\subsubsection{Esquema básico}\label{subsubsec:eg_esquema_basico}
 
 Con la condición necesaria de que $a_{ii}^{i-1} \neq 0$ para todo $i = 1,\ldots,n-1$.
 
 \begin{algorithm}
 \begin{algorithmic}
-\caption{Eliminación Gaussiana}
-\label{alg:eg}
+\caption{Eliminación Gaussiana}\label{alg:eg}
+
 \For{$i = 1,\ldots,n-1$}
     \For{$j = i+1,\ldots,n$}
         \State $m_{ji} \gets a_{ji}^{i-1}/a_{ii}^{i-1}$ \Comment{\emph{1 (c)ociente}}
@@ -124,8 +121,7 @@ Si en el paso i-ésimo nos encontramos con $a_{ii}^{i-1} = 0$, pueden darse dos 
     \item Existe $a_{j'i}^{i-1} \neq 0$ para algún $j' \geq i+1$. En este caso, basta permutar la fila $i$ con la $j'$ y continuar con el algoritmo.
 \end{itemize}
 
-\subsection{Estrategias de pivoteo}
-\label{subsec:estrategias_de_pivoteo}
+\subsection{Estrategias de pivoteo}\label{subsec:estrategias_de_pivoteo}
 
 Es deseable evitar errores generados por trabajar con aritmética finita, para ello se pueden utilizar algunas estrategias de pivoteo.
 
@@ -133,7 +129,3 @@ Es deseable evitar errores generados por trabajar con aritmética finita, para e
     \item Pivoteo parcial: Entre las filas $i$ a $n$, utilizar como fila \emph{pivote} aquella con mayor $|a_{ji}^{i-1}|$. Realizar la permutación necesaria entre las filas para ubicar en el lugar $ii$ dicho coeficiente.
     \item Pivoteo completo: Entre las filas $i$ a $n$ y las columnas $i$ a $n$, calcular el mayor $|a_{kl}^{i-1}|$. Realizar la permutación necesaria entre las filas y columnas para ubicar en el lugar $ii$ dicho coeficiente.
 \end{itemize}
-
-
-
-
