@@ -19,3 +19,81 @@ Sea $A \in \mathbb{R}^{n \times n}$, $A$ se dice símetrica definida positiva (s
     la eliminación gaussiana es sdp.
     \item Se puede realizar el método de eliminación gaussiana sin necesidad de permutar filas.
 \end{itemize}
+
+\subsection{Adicionales}\label{matrices_sdp_adicionales}
+
+\noindent Sean $A,B \in \mathbb{R}^{n \times n}$ definidas positivas.
+
+\begin{itemize}
+    \item[-] ¿Es $A^t$ definida positiva?
+
+    \[x^{t}A^{t}x = {(Ax)}^{t}{(x^t)}^{t} = {(x^{t}Ax)}^{t} = x^{t}Ax > 0\]
+
+    \item[-] ¿Es $A+B$ definida positiva?
+
+    \[x^{t}(A+B)x = \underbrace{x^{t}Ax}_{ > 0} + \underbrace{x^{t}Bx}_{ > 0} > 0\]
+
+    \item[-] ¿Es $A^2$ definida positiva?
+
+    tengo que $e^{t}_{i}Ae_{j} = a_{ij}$, luego, si tengo 
+
+    \[A^2 = 
+    \begin{bmatrix}
+        1 & -1 \\
+        1 & 1
+    \end{bmatrix}
+    \cdot
+    \begin{bmatrix}
+        1 & -1 \\
+        1 & 1
+    \end{bmatrix}
+    =
+    \begin{bmatrix}
+        0 & -2 \\
+        2 & 0
+    \end{bmatrix}
+    \]
+
+    obtengo que con $x = e_1$
+
+    \[
+    \begin{bmatrix}
+        1 & 0
+    \end{bmatrix}
+    \begin{bmatrix}
+        0 & -2 \\
+        2 & 0
+    \end{bmatrix}
+    \begin{bmatrix}
+        1 \\ 0
+    \end{bmatrix}
+    =
+    \begin{bmatrix}
+        1 & 0
+    \end{bmatrix}
+    \begin{bmatrix}
+        0 \\ 2
+    \end{bmatrix}
+    = 0
+    \]    
+
+    \item[-] ¿Es $A^2$ sdp si $A$ es sdp?
+
+    Tengo que $y^{t}y = {||y||}_{2}^{2}$, y $A^{2} = A^{t}A$, luego
+
+    \[x^{t}A^{2}x = x^{t}A^{t}Ax = (x^{t}A^{t})(Ax) = {(Ax)}^{t}(Ax) = {||Ax||}^{2}_{2} > 0\]
+
+    pues $Ax \neq 0$ para todo $x \neq 0$ ($A$ es inversible).
+
+\end{itemize}
+
+\subsection{Enunciados de la guía práctica}\label{subsec:enunciados_guia_3_sdp}
+
+\subsubsection{Ejercicio 4}\label{subsubsec:guia_4_ej_4}
+
+Sea $A$ una matriz simétrica y definida posititiva. Probar que $\forall x, y \in \mathbb{R}^{n}$ se cumple:
+
+\begin{itemize}
+    \item[a)] Si $x$ e $y$ son linealmente independientes, $|x^{t}Ay| < \sqrt{x^{t}Ax}\sqrt{y^{t}Ay}$
+    \item[b)] Si $x$ e $y$ son linealmente independientes, $|x^{t}Ay| = \sqrt{x^{t}Ax}\sqrt{y^{t}Ay}$
+\end{itemize}
