@@ -421,6 +421,89 @@ u_{11} & u_{12} & \ldots & u_{1i} & \ldots & u_{1n} \\
     \item Si $A$ es estrictamente diagonal dominante, su factorización LU es única.
 \end{itemize}
 
+\subsection{Matriz Banda}\label{subsec:matriz_banda}
+
+Sea $A \in \mathbb{R}^{n \times n}$, $A$ es una matriz banda si 
+
+\[a_{ij} = 0 ~\forall~ i,j ~:~ j < q \land i < p\]
+
+donde $p$ y $q$ determinan el ancho de banda izquierdo y derecho (el ancho de banda de dicha matriz está dado por $p + q - 1$)
+
+\
+
+(una matriz banda tendrá factorización $LU$ solo si sus diagonales principales son inversibles)
+
+\subsubsection{Matrices tridiagonales}\label{subsubsec:matriz_tridiagonal}
+
+Un caso particular de las matrices banda es cuando $p = q = 2$, donde se tiene una matriz tridiagonal de la forma
+
+\[
+A =
+\begin{bmatrix}
+    b_{1} & c_{1} & 0      & \ldots & 0 & 0 & 0 \\
+    a_{2} & b_{2} & c_{2} &   &   & 0 & 0 \\
+    0      & a_{3} & b_{3} & \ddots  &   &  & 0 \\
+    \vdots &        & \ddots & \ddots & \ddots &  & \vdots \\
+    0      &        &        & \ddots & b_{n-2} & c_{n-2} & 0 \\
+    0      & 0      &        &  & a_{n-1} & b_{n-1} & c_{n-1} \\
+    0      & 0      & 0 & \ldots & 0 & a_{n} & b_{n} \\
+\end{bmatrix}
+\]
+
+\
+
+en dicha situación, computar su factorización LU es más simple que con otras matrices generales.
+
+\
+
+\[
+A =
+\begin{bmatrix}
+    b_{1} & c_{1} & 0      & \ldots & 0 & 0 & 0 \\
+    a_{2} & b_{2} & c_{2} &   &   & 0 & 0 \\
+    0      & a_{3} & b_{3} & \ddots  &   &  & 0 \\
+    \vdots &        & \ddots & \ddots & \ddots &  & \vdots \\
+    0      &        &        & \ddots & b_{n-2} & c_{n-2} & 0 \\
+    0      & 0      &        &  & a_{n-1} & b_{n-1} & c_{n-1} \\
+    0      & 0      & 0 & \ldots & 0 & a_{n} & b_{n} \\
+\end{bmatrix}
+=
+\]
+
+\
+
+\[
+\begin{bmatrix}
+    1 & 0 & 0      & \ldots & 0 & 0 & 0 \\
+    \alpha_{2} & 1 & 0 &   &   & 0 & 0 \\
+    0      & \alpha_{3} & 1 & \ddots  &   &  & 0 \\
+    \vdots &        & \ddots & \ddots & \ddots &  & \vdots \\
+    0      &        &        & \ddots & 1 & 0 & 0 \\
+    0      & 0      &        &  & \alpha_{n-1} & 1 & 0 \\
+    0      & 0      & 0 & \ldots & 0 & \alpha_{n} & 1 \\
+\end{bmatrix}
+\begin{bmatrix}
+    \beta_{1} & c_{1} & 0      & \ldots & 0 & 0 & 0 \\
+    0 & \beta_{2} & c_{2} &   &   & 0 & 0 \\
+    0      & 0 & \beta_{3} & \ddots  &   &  & 0 \\
+    \vdots &        & \ddots & \ddots & \ddots &  & \vdots \\
+    0      &        &        & \ddots & \beta_{n-2} & c_{n-2} & 0 \\
+    0      & 0      &        &  & 0 & \beta_{n-1} & c_{n-1} \\
+    0      & 0      & 0 & \ldots & 0 & 0 & \beta_{n} \\
+\end{bmatrix}
+= LU
+\]
+
+\
+
+donde $b_1 = \beta_1$ y 
+
+\[a_j = \alpha_j \cdot \beta_{j-1} ~~~~~~~~~~~~~~~~~~ b_j = \alpha_j \cdot c_{j-1} + b_j\]
+
+\
+
+de esta forma la complejidad de esta factorización pertenece a $O(n)$.
+
 \subsection{Factorización PLU}\label{subsec:factorizacion_plu}
 
 En el caso de que exista $i = 1,\ldots,n$ para el cual $a_{ii}^{i-1} = 0$, se puede continuar la Eliminación Gaussiana mediante permutación de filas y obtener una factorización LU de la matriz original permutada, de la forma 
@@ -511,7 +594,7 @@ Sea $A \in \mathbb{R}^{n \times n}$ inversible, $A = TS$, con $T$ triangular inf
     
     con esto, sean $D_1 , D_2 \in \mathbb{R}^{n \times n}$ diagonales, con ${(D_1)}_{ii} =  \frac{1}{T_{ii}}$ y con ${(D_2)}_{ii} = T_{ii}$. Donde $D_1 D_2 = I$.
     
-    don lo que $A = TS = TIS = \underbrace{TD_1}_{L}\underbrace{D_2 S}_{U}$. Luego, quiero ver que esto es una factorización $LU$.
+    con lo que $A = TS = TIS = \underbrace{TD_1}_{L}\underbrace{D_2 S}_{U}$. Luego, quiero ver que esto es una factorización $LU$.
     
     Tengo que $L$ es triangular inferior con unos en su diagonal y $U$ triangular superior. Adicionalmente
     

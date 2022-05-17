@@ -1,1 +1,85 @@
 % factorizacion_de_cholesky
+
+Sea $A \in \mathbb{R}^{n \times n}$, $A$ es sdp, y se tiene que
+
+\[A = LU\]
+\[A^{t} = {(LU)}^{t} = U^{t}L^{t}\]
+\[A = A^t \implies LU = U^{t}L^{t}\]
+
+como $L$ es triangular inferior (y $L^t$ triangular superior) con unos en la diagonal, es inversible
+
+\[LU = U^t L^t \implies L^{-1}LU = L^{-1}U^{t}L^{t} \implies U = L^{-1}U^{t}L^{t} \implies 
+U{(L^t)}^{-1} = L^{-1}U^{t}L^{t}{(L^t)}^{-1} \implies U{(L^t)}^{-1} = L^{-1}U\]
+
+y tengo que $U{(L^t)}^{-1} = L^{-1}U = D$ (matriz diagonal), y entonces
+
+\[U{(L^t)}^{-1} = D \implies U{(L^t)}^{-1}L^t = DL^t \implies U = DL^t\]
+
+con esto se llega a que con $A \in \mathbb{R}^{n \times n}$
+
+\[A = LU LDL^t\]
+
+Sea $x \neq 0$ tal que $L^t x = e_i$.
+
+\[0 < x^t Ax = x^t LDL^t x = e_{i}^{t}De_i = d_{ii}\]
+\[D = \sqrt{D}\sqrt{D}\]
+\[A = L\sqrt{D}\sqrt{D}L^t = \widetilde{L}\widetilde{L}^{t}\]
+
+y $A = \widetilde{L}\widetilde{L}^{t}$ es la Factorización de Cholesky.
+
+\subsection{Algoritmo de la Factorización de Cholesky}\label{subsec:algoritmo_de_cholesky}
+
+El cómputo a realizar es la siguiente factorización
+
+\[
+\begin{bmatrix}
+    a_{11} & a_{21} & \ldots & a_{n1} \\
+    a_{21} & a_{21} & \ldots & a_{n2} \\
+    \vdots & \vdots & \ddots & \vdots \\
+    a_{i1} & a_{i2} & \ldots & a_{ni} \\
+    \vdots & \vdots & \ddots & \vdots \\
+    a_{n1} & a_{n1} & \ldots & a_{nn} \\
+\end{bmatrix}
+=
+\begin{bmatrix}
+    \tilde{l}_{11} & 0 & \ldots & 0 \\
+    \tilde{l}_{21} & \tilde{l}_{21} & \ldots & 0 \\
+    \vdots & \vdots & \ddots & \vdots \\
+    \tilde{l}_{i1} & \tilde{l}_{i2} & \ldots & 0 \\
+    \vdots & \vdots & \ddots & \vdots \\
+    \tilde{l}_{n1} & \tilde{l}_{n1} & \ldots & \tilde{l}_{nn} \\
+\end{bmatrix}
+\begin{bmatrix}
+    \tilde{l}_{11} & \tilde{l}_{21} & \ldots & \tilde{l}_{n1} \\
+    0 & \tilde{l}_{21} & \ldots & \tilde{l}_{n2} \\
+    \vdots & \vdots & \ddots & \vdots \\
+    0 & 0 & \ldots & \tilde{l}_{ni} \\
+    \vdots & \vdots & \ddots & \vdots \\
+    0 & 0 & \ldots & \tilde{l}_{nn} \\
+\end{bmatrix}
+\]
+
+haciendo uso del siguiente algoritmo
+
+\begin{algorithm}
+\begin{algorithmic}
+    \caption{Factorización de Cholesky}\label{alg:fact_cholesky}
+    \State $\tilde{l}_{11} \gets \sqrt{a_{11}}$
+    \For{$j = 2\ldots n$}
+        \State $\tilde{l}_{j1} \gets \frac{a_{j1}}{\tilde{l}_{11}}$
+    \EndFor
+    \For{$i = 2\ldots n-1$}
+        \State $\tilde{l}_{ii} \gets \sqrt{a_{ii} - \sum_{k=1}^{i-1}\tilde{l}_{ik}^{2}}$
+        \For{$j = i+1\ldots n$}
+            \State $\tilde{l}_{ji} \gets \frac{a_{ji} - \sum_{k=1}^{i-1}\tilde{l}_{jk}\tilde{l}_{ik}}{\tilde{l}_{ii}}$
+        \EndFor
+    \EndFor
+    \State $\tilde{l}_{nn} \gets \sqrt{a_{nn} - \sum_{k=1}^{n-1}\tilde{l}_{nk}^{2}}$
+\end{algorithmic}
+\end{algorithm}
+    
+\subsection{Ejemplo}\label{subsec:ejemplo_cholesky}
+
+\subsection{Enunciados de la guía práctica}\label{subsec:enunciados_guia_3_cholesky}
+
+\subsubsection{Ejercicio 11}\label{subsubsec:guia_3_ej_11}
