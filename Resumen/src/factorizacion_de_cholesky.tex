@@ -80,6 +80,134 @@ haciendo uso del siguiente algoritmo
     
 \subsection{Ejemplo}\label{subsec:ejemplo_cholesky}
 
+Sea $A \in \mathbb{R}^{n \times n}$  tal que $A_n = {(a_{ij})}_{1 \leq i,j \leq n}$ donde $a_{ij} = min\{i,j\}$
+
+tengo entonces por ejemplo
+
+\[
+A_1 = 
+\begin{bmatrix}
+1
+\end{bmatrix}
+~~~~~~~~~~
+A_2 =
+\begin{bmatrix}
+    1 & 1 \\
+    1 & 2
+\end{bmatrix}
+~~~~~~~~~~
+A_3 =
+\begin{bmatrix}
+    1 & 1 & 1 \\
+    1 & 2 & 2 \\
+    1 & 2 & 3
+\end{bmatrix}
+\]
+
+\
+
+Para probarlo hago inducción en $n$.
+
+\begin{itemize}
+    \item[-] Caso base: $n=1$, $A_1 = [1]$, con ello tengo que $x^{t}Ax = x^2 > 0$ para todo $x \neq 0$.
+    \item[-] Paso inductivo: Utilizo como hipótesis inductiva el que $A_k$ es sdp $\forall~k < n$, y pruebo que $A_n$ es sdp.
+
+    $A_n$ es simétrica, para probar que es definida positiva, busco su factorización de cholesky. Tengo que 
+
+    \[
+    \begin{bmatrix}
+        1 & \vline & 1 & \ldots & 1 \\
+        \hline
+        1 & \vline & 2 & \ldots & 2 \\
+        \vdots & \vline & \vdots & \ddots & \vdots \\
+        1 & \vline & 2 & \ldots & n \\
+    \end{bmatrix}
+    =
+    \begin{bmatrix}
+        L_{11} & \vline & \overline 0^t \\
+        \hline
+        L_{21} & \vline & L_{22}
+    \end{bmatrix}
+    \begin{bmatrix}
+        L_{11} & \vline & L_{21}^{t} \\
+        \hline
+        \overline 0 & \vline & L_{22}^{t}
+    \end{bmatrix}
+    =
+    \begin{bmatrix}
+        L_{11}^{2} & \vline & L_{11}L_{21}^{t} \\
+        \hline
+        L_{21}L_{11} & \vline & L_{21}L_{21}^{t} + L_{22}L_{22}^{t}
+    \end{bmatrix}
+    \]
+
+    donde se puede ver que estos productos resultan ser
+
+    \begin{itemize}
+        \item[$\cdot$] $L_{11}^{2} = 1 \implies L_{11} = 1$
+        \item[$\cdot$] $L_{21}L_{11} = \begin{bmatrix} 1 \\ \vdots \\ 1 \end{bmatrix} \implies 
+        L_{21}= \begin{bmatrix} 1 \\ \vdots \\ 1 \end{bmatrix} \implies L_{21}^{t} = \begin{bmatrix} 1 & \ldots & 1 \end{bmatrix}$
+        \item[$\cdot$] $L_{21}L_{21}^{t} + L_{22}L_{22}^{t} = 
+        \begin{bmatrix} 
+            2 & 2 &\ldots & 2 \\
+            2 & 3 &\ldots & 3 \\
+            \vdots & \vdots & \ddots & \vdots \\
+            2 & 3 & \ldots & n
+        \end{bmatrix}
+        \implies L_{22}L_{22}^{t} = 
+        \begin{bmatrix} 
+            2 & 2 &\ldots & 2 \\
+            2 & 3 &\ldots & 3 \\
+            \vdots & \vdots & \ddots & \vdots \\
+            2 & 3 & \ldots & n
+        \end{bmatrix}
+        -
+        \begin{bmatrix} 
+            1 \\
+            \vdots \\
+            1 
+        \end{bmatrix}
+        \begin{bmatrix} 
+            1 & \ldots & 1
+        \end{bmatrix}
+        $
+
+        lo cual es lo mismo que
+
+        $L_{22}L_{22}^{t} = 
+        \begin{bmatrix} 
+            2 & 2 &\ldots & 2 \\
+            2 & 3 &\ldots & 3 \\
+            \vdots & \vdots & \ddots & \vdots \\
+            2 & 3 & \ldots & n
+        \end{bmatrix}
+        -
+        \begin{bmatrix} 
+            1 & 1 &\ldots & 1 \\
+            1 & 1 &\ldots & 1 \\
+            \vdots & \vdots & \ddots & \vdots \\
+            1 & 1 & \ldots & 1
+        \end{bmatrix}
+        =
+        \begin{bmatrix} 
+            1 & 1 &\ldots & 1 \\
+            1 & 2 &\ldots & 2 \\
+            \vdots & \vdots & \ddots & \vdots \\
+            1 & 2 & \ldots & n-1
+        \end{bmatrix}
+        =
+        A_{n-1}
+        $
+    \end{itemize}
+
+    y por hipótesis inductiva, $A_{n-1}$ es sdp, lo cual implica que $A_{n-1} = \widetilde{L}\widetilde{L}^{t}$ (cholesky de $A_{n-1}$).
+
+    Entonces $L_{22} = \widetilde{L}$ de la factorizaión de cholesky de $A_{n-1}$.
+
+\end{itemize}
+
 \subsection{Enunciados de la guía práctica}\label{subsec:enunciados_guia_3_cholesky}
+
+
 
 \subsubsection{Ejercicio 11}\label{subsubsec:guia_3_ej_11}
