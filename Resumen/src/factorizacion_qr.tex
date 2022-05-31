@@ -575,26 +575,323 @@ y se necesita que $Wv = 0$ y $Wu = 2u$.
 
 
 
-\noindent Sean $A \in \mathbb{R}^{2 \times 2},~\tilde{x}=\begin{bmatrix}
-    a_{11} \\ a_{21}
-\end{bmatrix}$ y $\tilde{y} = \begin{bmatrix}
-    {||\tilde{x}||}_{2} \\ 0
-\end{bmatrix}$.
+\begin{itemize}
+    \item[-] Sean $A \in \mathbb{R}^{2 \times 2},~\tilde{x}=\begin{bmatrix}
+        a_{11} \\ a_{21}
+    \end{bmatrix}$ y $\tilde{y} = \begin{bmatrix}
+        {||\tilde{x}||}_{2} \\ 0
+    \end{bmatrix}$.
+    
+    \
+    
+    \noindent Existe $H$ tal que $H\tilde{x} = \tilde{y}$.
+    
+    \[HA = \begin{bmatrix}
+        {||\tilde{x}||}_{2} & * \\
+        0 & *
+    \end{bmatrix}\]
+    \[HA = R\]
+    \[H^{t}HA = H^{t}R\]
+    \[A = QR\]
+
+    \item[-] Sean $A \in \mathbb{R}^{n \times n},~\tilde{x}=\begin{bmatrix}
+        a_{11} \\ a_{21} \\ \vdots \\ a_{n1}
+    \end{bmatrix}$ y $\tilde{y} = \begin{bmatrix}
+        {||\tilde{x}||}_{2} \\ 0 \\ \vdots \\ 0
+    \end{bmatrix}$,  $\tilde{x}, \tilde{y} \in \mathbb{R}^{n}$
+    
+    \
+    
+    \noindent Existe $H_1 \in \mathbb{R}^{n}$ tal que $H_1\tilde{x} = \tilde{y}$.
+    
+    \noindent $H_1 = I - 2u_{1}u_{1}^{t}$ con $u_1 = \frac{\tilde{x} - \tilde{y}}{{||\tilde{x} - \tilde{y}||}_{2}}$.
+    
+    \[H_{1}A = \begin{bmatrix}
+        {||\tilde{x}||}_{2} & a_{12}^{1} & \ldots & a_{1n}^{1} \\
+        \textcolor{red}{0} & a_{22}^{1} & \ldots & a_{2n}^{1} \\
+        \textcolor{red}{\vdots} & \vdots & \ddots & \vdots \\
+        \textcolor{red}{0} & a_{n2}^{1} & \ldots & a_{nn}^{1} \\
+    \end{bmatrix} = A^{1}\]
+        
+    \item[-] Sean $\tilde{x}=\begin{bmatrix}
+        a_{22}^{1} \\ a_{32}^{1} \\ \vdots \\ a_{n2}^{1}
+    \end{bmatrix}$ y $\tilde{y} = \begin{bmatrix}
+        {||\tilde{x}||}_{2} \\ 0 \\ \vdots \\ 0
+    \end{bmatrix}$,  $\tilde{x}, \tilde{y} \in \mathbb{R}^{n-1}$
+    
+    \
+    
+    \noindent Existe $H \in \mathbb{R}^{(n-1)\times(n-1)}$ tal que $H\tilde{x} = \tilde{y}$.
+    
+    \noindent $H = I - 2u_{2}u_{2}^{t}$ con $u_2 = \frac{\tilde{x} - \tilde{y}}{{||\tilde{x} - \tilde{y}||}_{2}}$, $u_2 \in \mathbb{R}^{n-1}$. Sea $H_2 \in \mathbb{R}^{n \times n}$
+    
+    \[H_2 = \begin{bmatrix}
+        1 & 0 \\
+        0 & I - 2u_{2}u_{2}^{t}
+    \end{bmatrix}\]
+
+    \[H_{2}A^{1} = \begin{bmatrix}
+        a_{11}^{1} & a_{12}^{1} & a_{13}^{1} & \ldots & a_{1n}^{1} \\
+        \textcolor{red}{0} & {||\tilde{x}||}_{2} & a_{23}^{2} & \ldots & a_{n}^{2} \\
+        \textcolor{red}{0} & \textcolor{red}{0} & a_{33}^{2} & \ldots & a_{3n}^{2} \\
+        \textcolor{red}{\vdots} & \textcolor{red}{\vdots} & \vdots & \ddots & \vdots \\
+        \textcolor{red}{0} & \textcolor{red}{0} & a_{n3}^{2} & \ldots & a_{nn}^{2} \\
+    \end{bmatrix} = A^{2}\]
+    
+    \item[-] Sean $\tilde{x}=\begin{bmatrix}
+        a_{ii}^{(i-1)} \\ a_{i+1i}^{(i-1)} \\ \vdots \\ a_{ni}^{(i-1)}
+    \end{bmatrix}$ y $\tilde{y} = \begin{bmatrix}
+        {||\tilde{x}||}_{2} \\ 0 \\ \vdots \\ 0
+    \end{bmatrix}$,  $\tilde{x}, \tilde{y} \in \mathbb{R}^{n-i+1}$
+    
+    \
+    
+    \noindent Existe $H \in \mathbb{R}^{(n-i+1)\times(n-i+1)}$ tal que $H\tilde{x} = \tilde{y}$.
+    
+    \noindent $H = I - 2u_{i}u_{i}^{t}$ con $u_i = \frac{\tilde{x} - \tilde{y}}{{||\tilde{x} - \tilde{y}||}_{2}}$, $u_i \in \mathbb{R}^{n-i+1}$. 
+    Sea $H_i \in \mathbb{R}^{n \times n}$
+    
+    \[H_i = \begin{bmatrix}
+        I & 0 \\
+        0 & I - 2u_{i}u_{i}^{t}
+    \end{bmatrix}\]
+
+    con $I \in \mathbb{R}^{i-1 \times i -1}$
+
+    \[H_{i}A^{(i-1)} = \begin{bmatrix}
+        a_{11}^{(i-1)} & a_{12}^{(i-1)} & \ldots & a_{1i}^{(i-1)} & a_{1i+1}^{(i-1)} & \ldots & a_{1n}^{(i-1)} \\
+        \textcolor{red}{0} & a_{12}^{(i-1)} & \ldots & a_{1i}^{(i-1)} & a_{1i+1}^{(i-1)} & \ldots & a_{1n}^{(i-1)} \\
+        \textcolor{red}{\vdots} & \textcolor{red}{\vdots} & \ddots & \vdots & \vdots & \ddots & \vdots \\
+        \textcolor{red}{0} & \textcolor{red}{0} & \textcolor{red}{\ldots} & {||\tilde{x}||}_{2} & a_{ii+1}^{i} & \ldots & a_{1n}^{(i-1)} \\
+        \textcolor{red}{0} & \textcolor{red}{0} & \textcolor{red}{\ldots} & \textcolor{red}{0} & a_{i+1i+1}^{i} & \ldots & a_{1n}^{(i-1)} \\
+        \textcolor{red}{\vdots} & \textcolor{red}{\vdots} & \textcolor{red}{\ddots} & \textcolor{red}{\vdots} & \vdots & \ddots & \vdots \\
+        \textcolor{red}{0} & \textcolor{red}{0} & \textcolor{red}{\ldots} & \textcolor{red}{0} & a_{ni+1}^{i} & \ldots & a_{1n}^{(i-1)} \\
+    \end{bmatrix} = A^{i}\]   
+    
+\end{itemize}
 
 \
 
-\noindent Existe $H$ tal que $H\tilde{x} = \tilde{y}$.
+\noindent Dichas matrices permiten realizar el siguiente cálculo
 
- \[HA = \begin{bmatrix}
-    {||\tilde{x}||}_{2} & * \\
-    0 & *
- \end{bmatrix}\]
- \[HA = R\]
- \[H^{t}HA = H^{t}R\]
- \[A = QR\]
+\[H_{n-1}H_{n-2}\cdots H_{1}A = R\]
+\[A = H_{1}^{t}\cdots H_{n-2}^{t}H_{n-1}^{t}R\]
+\[A = QR\]
 
 \subsubsection{Costo}\label{subsubsec:householder_costo}
 
+\[H_{n-1}H_{n-2}\cdots H_{1}A = R\]
+
+\begin{itemize}
+    \item Primera columna:
+    
+    $H_1 = I - 2u_{1}u_{1}^{t}$
+
+    $H_{1}A = A - 2u_{1}u_{1}^{t}A$
+
+    \begin{itemize}
+        \item[-] Costo de $u_{1}^{t}A:~n$ ($n$ productos $+ (n-1)$ sumas).
+        \item[-] Costo de $u_1(u_{1}^{t}A):~n^2$ productos.
+        \item[-] Costo total: $2n^2 + n(n-1)$
+    \end{itemize}
+
+    \item I-ésima columna:
+    
+    $H_{i} = \begin{bmatrix}
+        I & 0 \\ 0 & I - 2u_{i}u_{i}^{t}
+    \end{bmatrix}$ actúa en matriz $(n-i+1)\times(n-i+1)$
+
+    \begin{itemize}
+        \item[-] Costo total: $2{(n-i+1)}^{2} + (n-i+1)(n-i)$
+    \end{itemize}
+\end{itemize}
+
+Costo total del algoritmo
+
+\[\sum_{i=1}^{n-1} 2{(n-i+1)}^{2} + 2(n-i+1)(n-i) ~\in O(\frac{2}{3}n^{3})\]
+
+\newpage
+
 \subsubsection{Ejemplo}\label{subsubsec:householder_ejemplo}
 
+Se tiene 
+\[
+A = 
+\begin{bmatrix}
+    1 & 19 & -43 \\
+    -2 & -5 & 20 \\
+    2 & 8 & 37
+\end{bmatrix}
+\]
+
+\
+
+\noindent Sea $\tilde{x} = (1,-2,2)$. Buscamos $H_1$, reflexión, tal que $H\tilde{x} = \tilde{y}$ con $\tilde{y} = (3,0,0)$.
+
+\
+
+\noindent Definimos $u_1 = \frac{\tilde{x} - \tilde{y}}{{||\tilde{x}- \tilde{y}||}_{2}} = \frac{1}{\sqrt{12}}(-2,-2,2)$
+
+\
+
+$H_1 = I - 2u_{1}u_{1}^{t} = \begin{bmatrix}
+1 & 0 & 0 \\
+0 & 1 & 0 \\
+0 & 0 & 1
+\end{bmatrix} - \frac{2}{12} \begin{bmatrix}
+    -2 \\ -2 \\ 2
+\end{bmatrix} \begin{bmatrix}
+    -2 & -2 & 2
+\end{bmatrix}$
+
+\[(I - 2uu^{t})A = A - 2uu^t A\]
+\[
+    \begin{bmatrix}
+    1 & 19 & -43 \\
+    -2 & -5 & 20 \\
+    2 & 8 & 37
+\end{bmatrix} - \frac{2}{12}\begin{bmatrix}
+    -2 \\ -2 \\ 2
+\end{bmatrix} \begin{bmatrix}
+    -2 & -2 & 2
+\end{bmatrix} \begin{bmatrix}
+    1 & 19 & -43 \\
+    -2 & -5 & 20 \\
+    2 & 8 & 37
+\end{bmatrix} =
+\]
+\[
+\begin{bmatrix}
+    1 & 19 & -43 \\
+    -2 & -5 & 20 \\
+    2 & 8 & 37
+\end{bmatrix} - \frac{2}{12}\begin{bmatrix}
+    -2 \\ -2 \\ 2
+\end{bmatrix} \begin{bmatrix}
+    6 & -12 & 102 
+\end{bmatrix} =
+\begin{bmatrix}
+    1 & 19 & -43 \\
+    -2 & -5 & 20 \\
+    2 & 8 & 37
+\end{bmatrix} - \begin{bmatrix}
+    -2 & 4 & -34 \\
+    -2 & 4 & -34 \\
+    4 & -2 & 34 \\
+\end{bmatrix}  = \begin{bmatrix}
+    3 & 15 & 0 \\
+    \textcolor{red}{0} & -9 & 54 \\
+    \textcolor{red}{0} & 12 & 3
+\end{bmatrix} 
+\]
+
+\noindent Con esto, sea $\tilde{A} = \begin{bmatrix}
+    -9 & 54 \\ 12 & 3
+\end{bmatrix}$ y $\tilde{x} = (-9, 12)$. Buscamos $H$, reflezxión, tal que $H\tilde{x} = \tilde{y}$ con $\tilde{y} = (15,0)$.
+
+\
+
+\noindent Definimos $u_2 = \frac{\tilde{x} - \tilde{y}}{{||\tilde{x}- \tilde{y}||}_{2}} = \frac{1}{\sqrt{720}}(-24,12)$, y tenemos que
+
+\
+
+$H = I - 2u_{2}u_{2}^{t} = \begin{bmatrix}
+    1 & 0 \\ 0 & 1
+\end{bmatrix} - \frac{2}{720}\begin{bmatrix}
+    -24 \\ 12
+\end{bmatrix} \begin{bmatrix}
+    -24 & 12
+\end{bmatrix}$
+
+\[(I- 2u_{2}u_{2}^{t})\tilde{A} = \tilde{A} - 2u_{2}u_{2}^{t}\tilde{A}\]
+\[\begin{bmatrix}
+    -9 & 54 \\ 12 & 3
+\end{bmatrix} - \frac{2}{720}\begin{bmatrix}
+    -24 \\ 12
+\end{bmatrix}\begin{bmatrix}
+    -24 & 12
+\end{bmatrix}\begin{bmatrix}
+    -9 & 54 \\ 12 & 3
+\end{bmatrix} = 
+\begin{bmatrix}
+    -9 & 54 \\ 12 & 3
+\end{bmatrix} - \frac{2}{720}\begin{bmatrix}
+    -24 \\ 12
+\end{bmatrix}\begin{bmatrix}
+    360 & -1260
+\end{bmatrix} = 
+\]
+\[
+\begin{bmatrix}
+    -9 & 54 \\ 12 & 3
+\end{bmatrix} - \begin{bmatrix}
+    -24 & 84 \\
+    12 & -42
+\end{bmatrix} = \begin{bmatrix}
+    15 & -30 \\
+    \textcolor{red}{0} & 45
+\end{bmatrix}
+\]
+
+\noindent Definiendo $H_2 = \begin{bmatrix}
+    1 & 0 \\
+    0 & H
+\end{bmatrix}$ resulta entonces que
+
+\[
+H_{2}H_{1}A = \begin{bmatrix}
+    3 & 15 & 0 \\
+    \textcolor{red}{0} & 15 & -30 \\
+    \textcolor{red}{0} & \textcolor{red}{0} & 45
+\end{bmatrix}
+~~~~~~~~~~~~~~~~~~~
+A = H_{1}^{t}H_{2}^{t}\begin{bmatrix}
+    3 & 15 & 0 \\
+    \textcolor{red}{0} & 15 & -30 \\
+    \textcolor{red}{0} & \textcolor{red}{0} & 45
+\end{bmatrix}
+\]
+\[A = \begin{bmatrix}
+    I - 2u_{1}u_{1}^{t}
+\end{bmatrix}\begin{bmatrix}
+    1 & 0 \\
+    0 & I - 2u_{2}u_{2}^{t}
+\end{bmatrix}\begin{bmatrix}
+    3 & 15 & 0 \\
+    0 & 15 & -30 \\
+    0 & 0 & 45
+\end{bmatrix}
+\]
+\[A = (\begin{bmatrix}
+    1 & 0 \\ 0 & I - 2u_{2}u_{2}^{t}
+\end{bmatrix} - 2u_{2}u_{2}^{t}\begin{bmatrix}
+    1 & 0 \\
+    0 & I - 2u_{2}u_{2}^{t}
+\end{bmatrix}) \begin{bmatrix}
+    3 & 15 & 0 \\
+    0 & 15 & -30 \\
+    0 & 0 & 45
+\end{bmatrix}
+\]
+\[\begin{bmatrix}
+    1 & 9 & -34 \\
+    -2 & -5 & 20 \\
+    2 & 8 & 37
+\end{bmatrix} = 
+\begin{bmatrix}
+    \frac{1}{3} & \frac{14}{15} & \frac{-2}{15} \\
+    \frac{-2}{3} & \frac{5}{15} & \frac{10}{15} \\
+    \frac{2}{3} & \frac{-2}{15} & \frac{11}{15} \\
+\end{bmatrix}\begin{bmatrix}
+    3 & 15 & 0 \\
+    0 & 15 & -30 \\
+    0 & 0 & 45
+\end{bmatrix}
+\]
+\[A = QR\]
+
 \subsection{Propiedades}\label{subsec:propiedades_qr}
+
+Sean $A \in \mathbb{R}^{n \times n}$, $A$ inversible. 
+Existen únicas $Q \in \mathbb{R}^{n \times n}$ matriz ortogonal y $R \in \mathbb{R}^{n \times n}$ triangular superior con $r_{ii} > 0$ para todo $i = 1,\ldots,n$ tal que 
+\[A = QR\]
